@@ -2,6 +2,10 @@
 
 CV digital interactivo de una sola página, construido en React + TypeScript + Vite + Tailwind CSS. Sitio 100% estático, sin backend.
 
+**Live:** https://angel-alvarez-cv.vercel.app · **Repo:** https://github.com/alvarezgzx-lab/angel-alvarez-cv
+
+Conectado a Vercel vía el proyecto `angel-alvarez-cv` (equipo "Jesús Ángel"): cada push a `master` dispara un deploy automático.
+
 ## Correr localmente
 
 ```bash
@@ -48,7 +52,9 @@ node scripts/generate-favicons.mjs
 
 ## Desplegar
 
-### Vercel (recomendado)
+Ya está desplegado y conectado (ver arriba) — un `git push` a `master` re-despliega automáticamente. Lo demás queda como referencia si alguna vez necesitas migrarlo a otra cuenta/proveedor.
+
+### Vercel
 
 1. Sube este repositorio a GitHub/GitLab/Bitbucket.
 2. En [vercel.com](https://vercel.com), "Add New Project" → importa el repo.
@@ -70,9 +76,9 @@ node scripts/generate-favicons.mjs
 
 ## Después del deploy
 
-- **Actualiza las URLs absolutas**: `index.html`, `public/robots.txt` y `public/sitemap.xml` usan `https://angelalvarez.vercel.app/` como placeholder (canonical, `og:url`, `og:image`, sitemap). Reemplázalas por el dominio real una vez desplegado — búscalas con `grep -rn "angelalvarez.vercel.app" index.html public/`.
+- Si en algún momento conectas un dominio propio, actualiza las URLs absolutas en `index.html`, `public/robots.txt` y `public/sitemap.xml` (canonical, `og:url`, `og:image`, sitemap) — búscalas con `grep -rn "angel-alvarez-cv.vercel.app" index.html public/`.
 - Valida los meta tags de Open Graph con el [Sharing Debugger de Meta](https://developers.facebook.com/tools/debug/) y el [Post Inspector de LinkedIn](https://www.linkedin.com/post-inspector/).
-- Corre Lighthouse (Chrome DevTools → Lighthouse) y confirma ≥90 en Performance, Accessibility, Best Practices y SEO.
+- Lighthouse en el build de producción: 98 Performance / 100 Accessibility / 100 Best Practices / 100 SEO (medido localmente contra `npm run preview`; los números del servidor de `npm run dev` no son representativos).
 
 ## Privacidad
 
