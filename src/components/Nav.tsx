@@ -77,13 +77,15 @@ export default function Nav() {
         </button>
       </nav>
 
-      <ul
-        id="mobile-menu"
-        className={`grid overflow-hidden bg-navy font-mono text-sm uppercase tracking-wide text-cream/90 transition-[grid-template-rows] duration-200 md:hidden ${
+      <div
+        className={`grid bg-navy transition-[grid-template-rows] duration-200 md:hidden ${
           open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
         }`}
       >
-        <div className="overflow-hidden">
+        <ul
+          id="mobile-menu"
+          className="overflow-hidden font-mono text-sm uppercase tracking-wide text-cream/90"
+        >
           {navLinks.map((link) => (
             <li key={link.href} className="border-t border-cream/10">
               <a
@@ -95,8 +97,8 @@ export default function Nav() {
               </a>
             </li>
           ))}
-        </div>
-      </ul>
+        </ul>
+      </div>
     </header>
   )
 }

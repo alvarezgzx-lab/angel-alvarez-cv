@@ -70,7 +70,7 @@ node scripts/generate-favicons.mjs
 
 ## Después del deploy
 
-- **Actualiza las URLs absolutas**: `index.html` usa `https://angelalvarez.vercel.app/` como placeholder en `canonical`, `og:url` y `og:image`. Reemplázalas por el dominio real una vez desplegado (búscalas con `grep -n "angelalvarez.vercel.app" index.html`).
+- **Actualiza las URLs absolutas**: `index.html`, `public/robots.txt` y `public/sitemap.xml` usan `https://angelalvarez.vercel.app/` como placeholder (canonical, `og:url`, `og:image`, sitemap). Reemplázalas por el dominio real una vez desplegado — búscalas con `grep -rn "angelalvarez.vercel.app" index.html public/`.
 - Valida los meta tags de Open Graph con el [Sharing Debugger de Meta](https://developers.facebook.com/tools/debug/) y el [Post Inspector de LinkedIn](https://www.linkedin.com/post-inspector/).
 - Corre Lighthouse (Chrome DevTools → Lighthouse) y confirma ≥90 en Performance, Accessibility, Best Practices y SEO.
 
