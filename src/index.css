@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: #F4EFE6;
+  color: #17324D;
+}
+
+::selection {
+  background-color: #A95534;
+  color: #F4EFE6;
+}
+
+:focus-visible {
+  outline: 2px solid #CA653E;
+  outline-offset: 3px;
+}
