@@ -1,4 +1,5 @@
 import ExternalLink from './ExternalLink'
+import LinkedInEmbed from './LinkedInEmbed'
 import { proyectosPublicaciones } from '../data/content'
 
 export default function Proyectos() {
@@ -51,6 +52,14 @@ export default function Proyectos() {
                     </li>
                   ))}
                 </ul>
+              )}
+
+              {proyecto.embeds && proyecto.embeds.length > 0 && (
+                <div className="mt-6 flex flex-wrap gap-4">
+                  {proyecto.embeds.map((embed) => (
+                    <LinkedInEmbed key={embed.src} embed={embed} />
+                  ))}
+                </div>
               )}
             </li>
           ))}

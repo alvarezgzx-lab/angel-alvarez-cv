@@ -1,13 +1,12 @@
 export const persona = {
   name: 'Ángel Álvarez',
   fullName: 'Jesús Ángel Álvarez González',
-  headline: 'Licenciado en Educación y Administración de Centros Educativos',
+  headline: 'People Analytics · Capacitación y Desarrollo · Reclutamiento y Desarrollo Organizacional',
   targetRoles: [
-    'Capacitación y Desarrollo',
-    'Learning Analytics',
-    'Reclutamiento',
-    'Desarrollo Organizacional',
     'People Analytics',
+    'Capacitación y Desarrollo',
+    'Reclutamiento y Desarrollo Organizacional',
+    'Business Intelligence',
   ],
   location: 'Nuevo León, México',
   email: 'alvarezgzx@gmail.com',
@@ -16,7 +15,10 @@ export const persona = {
 }
 
 export const perfil =
-  'Licenciado en Educación y Administración de Centros Educativos por la Universidad Metropolitana de Monterrey (UMM), reconocido públicamente por la Cámara Nacional de la Industria Electrónica, de Telecomunicaciones y Tecnologías de la Información (CANIETI) Noreste por su proyecto de titulación, y autor de una publicación académica sobre innovación social y mercado EdTech. Su experiencia docente 2023–2026 le dio soltura para liderar grupos, diseñar capacitación y facilitar diseño instruccional — habilidades que dirige hacia Recursos Humanos, con genuino interés en investigación educativa y ciencias sociales. Busca consolidar carrera en Capacitación y Learning Analytics, Reclutamiento, Desarrollo Organizacional o People Analytics, en una empresa con estabilidad a largo plazo, consolidación del rol a corto plazo y crecimiento a mediano plazo. Aporta compromiso, creatividad y gusto genuino por el trabajo con personas, con interés en industrias en transformación.'
+  'Licenciado en Educación y Administración, con formación orientada a Gestión del Talento y Aprendizaje Corporativo. Experiencia liderando grupos numerosos, diseñando indicadores de desempeño y facilitando procesos de capacitación y desarrollo de habilidades. Su proyecto de titulación, reconocido por la Cámara Nacional de la Industria Electrónica, de Telecomunicaciones y Tecnologías de la Información (CANIETI) Noreste, lo formó en gestión de múltiples stakeholders al colaborar con expertos en arquitectura de soluciones de IT y ciberseguridad de Microsoft y con la división de transformación digital de la UMM. Estudios en Economía (UANL, hasta 6.° semestre) sentaron bases de pensamiento analítico, modelos predictivos y pensamiento estratégico.'
+
+export const objetivo =
+  'Consolidar una trayectoria en People Analytics, Capacitación y Desarrollo, y Business Intelligence, aplicando conocimientos en gestión de talento humano, diseño instruccional y análisis de datos — con compromiso genuino hacia las personas y fluidez tecnológica — para aportar valor estratégico a un equipo de Recursos Humanos.'
 
 export interface Formacion {
   titulo: string
@@ -30,12 +32,13 @@ export const formacion: Formacion[] = [
     titulo: 'Licenciatura en Educación y Administración de Centros Educativos',
     institucion: 'Universidad Metropolitana de Monterrey (UMM)',
     fecha: 'Titulado, agosto 2025',
-    nota: 'Proyecto de titulación: D.A.T.A. — Development of AI Teaching & Automation (ver Proyectos y Publicaciones).',
+    nota: 'Proyecto de titulación: D.A.T.A. — Development of AI Teaching & Automation; ecosistema multiagente de IA conversacional con piloto institucional de 86–98% de valoración docente, en colaboración con Microsoft y reconocido por CANIETI Noreste (ver Proyectos y Publicaciones).',
   },
   {
     titulo: 'Licenciatura en Economía',
     institucion: 'Universidad Autónoma de Nuevo León (UANL)',
     fecha: 'Hasta 6.° semestre, no concluida',
+    nota: 'Publicación académica en revisión (E-Socialis, UMM): análisis de 26 fuentes sobre el mercado EdTech; propone un marco de cuatro pilares (ver Proyectos y Publicaciones).',
   },
 ]
 
@@ -44,12 +47,20 @@ export interface EnlaceExterno {
   url: string
 }
 
+export interface Embed {
+  title: string
+  src: string
+  height: number
+  width: number
+}
+
 export interface Proyecto {
   titulo: string
   fecha: string
   descripcion: string
   enlacePrincipal: EnlaceExterno
   reconocimientos?: EnlaceExterno[]
+  embeds?: Embed[]
 }
 
 export const proyectosPublicaciones: Proyecto[] = [
@@ -72,6 +83,30 @@ export const proyectosPublicaciones: Proyecto[] = [
         url: 'https://lnkd.in/p/ea5sMYBe',
       },
     ],
+    embeds: [
+      {
+        title: 'Publicación de LinkedIn — reconocimiento de la UMM',
+        src: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7310043022786744320?collapsed=1',
+        height: 627,
+        width: 504,
+      },
+      {
+        title: 'Publicación de LinkedIn — reconocimiento de CANIETI Noreste',
+        src: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7321006183450894336?collapsed=1',
+        height: 627,
+        width: 504,
+      },
+    ],
+  },
+  {
+    titulo: 'Mis Skills de Claude',
+    fecha: '2026 · en desarrollo continuo',
+    descripcion:
+      'Repositorio personal de skills para Claude orientadas a Recursos Humanos y gestión de talento; incluye una skill para generar Strategic Workforce Planning Briefs mediante un proceso guiado de 7 fases.',
+    enlacePrincipal: {
+      label: 'Ver repositorio',
+      url: 'https://github.com/alvarezgzx-lab/mis-skills-de-claude',
+    },
   },
   {
     titulo:
@@ -95,26 +130,21 @@ export interface Experiencia {
 
 export const experiencia: Experiencia[] = [
   {
-    puesto: 'Docente de Español',
-    organizacion: 'Colegio Regiomontano Contry La Salle',
-    fecha: '2025 – 2026',
+    puesto: 'Docencia — Nivel Secundaria',
+    organizacion: 'Colegio Regiomontano Contry La Salle (2025–2026) · Colegio Mexicano (2023–2025)',
+    fecha: '2023 – 2026',
     bullets: [
-      'Docente titular de Español, nivel secundaria.',
-      'Liderazgo de la Academia de Ética, Naturaleza y Sociedades; organización de elecciones del Consejo Estudiantil.',
+      'Automatizó procesos de evaluación y diseñó indicadores de desempeño para dar seguimiento objetivo al progreso individual y grupal.',
+      'Gestionó simultáneamente hasta 11 grupos de más de 30 personas, sosteniendo desempeño colectivo bajo múltiples prioridades.',
+      'Brindó acompañamiento, tutoría y coaching individual y grupal — fortaleciendo desarrollo de habilidades, manejo de conflictos y liderazgo de iniciativas institucionales (Academia de Ética, procesos electorales estudiantiles).',
     ],
-  },
-  {
-    puesto: 'Docente de World History y MUN',
-    organizacion: 'Colegio Mexicano',
-    fecha: '2024 – 2025',
-    bullets: ['Docente titular de World History y Modelo de Naciones Unidas (MUN), secundaria.'],
   },
   {
     puesto: 'Practicante en diseño instruccional',
     organizacion: 'Talisis',
     fecha: '2022 – 2023',
     bullets: [
-      'Colaboración con Data Science, Ingeniería de Software e Innovación de Producto en herramienta de generación de contenido para diseño instruccional; apoyo a SMEs en licenciatura y maestría.',
+      'Colaboró con equipos de Data Science, Ingeniería de Software e Innovación de Producto en el desarrollo de herramientas de generación de contenido para diseño instruccional (licenciatura y maestría), apoyando detección de necesidades de capacitación y diseño de soluciones de aprendizaje escalables.',
     ],
   },
   {
@@ -122,7 +152,7 @@ export const experiencia: Experiencia[] = [
     organizacion: 'Trabajo autónomo',
     fecha: '2019 – 2022',
     bullets: [
-      'Autogestión de negocio independiente: ingresos, financiamiento de auto, atención a cliente y manejo del tiempo.',
+      'Autogestionó negocio independiente (ingresos, financiamiento, atención a cliente y manejo del tiempo), desarrollando autogestión y orientación a resultados bajo alta autonomía.',
     ],
   },
   {
@@ -130,45 +160,48 @@ export const experiencia: Experiencia[] = [
     organizacion: 'Santander Universidades',
     fecha: '2018 – 2019',
     bullets: [
-      'Gestión de posicionamiento de productos del sector universidades (Tec, UDEM, Becas NL, CONALEP); organización de eventos de credencialización estudiantil.',
+      'Gestionó posicionamiento de productos y eventos de credencialización estudiantil para instituciones del sector universidades (Tec, UDEM, Becas NL, CONALEP), coordinando relaciones multi-institucionales y gestión de cuentas.',
     ],
   },
 ]
 
 export const habilidades: Record<string, string[]> = {
+  'People Analytics, Talento y Desarrollo Organizacional': [
+    'Planeación de fuerza laboral',
+    'People analytics',
+    'Reclutamiento y selección',
+    'Onboarding',
+    'Desempeño y compensación',
+    'Planeación de sucesión',
+    'Gestión del cambio y cultura organizacional',
+  ],
   'Capacitación y Desarrollo': [
     'Diseño e impartición de capacitación',
     'Detección de necesidades (DNC)',
     'Diseño instruccional',
     'Facilitación',
+    'Liderazgo de grupos',
     'Prompt engineering',
   ],
-  'Desarrollo Organizacional': [
-    'Gestión del cambio',
-    'Cultura organizacional',
-    'Liderazgo de grupos',
-    'Coordinación multidisciplinaria',
-  ],
-  'Recursos Humanos — Transferibles': [
-    'Comunicación efectiva',
-    'Adaptabilidad',
-    'Autogestión y resiliencia',
-    'Pensamiento conceptual',
-  ],
-  Herramientas: [
+  'Análisis de Datos y Business Intelligence': [
+    'Power BI (modelado de datos, dashboards)',
+    'Análisis estadístico aplicado a negocio',
     'Excel intermedio-avanzado',
+    'Nociones de SQL y Python',
+  ],
+  'Herramientas y Transferibles': [
     'Word',
     'PowerPoint',
     'Herramientas de autor (Easy Generator, Articulate, Genially)',
     'HTML/React básico',
     'Claude avanzado',
-    'Nociones de xAPI, SCORM, SQL, Python, Power BI',
+    'Comunicación efectiva y adaptabilidad',
   ],
 }
 
 export const idiomas: Record<string, string> = {
   Español: 'Nativo',
-  Inglés: 'Intermedio',
+  Inglés: 'Intermedio-Avanzado',
 }
 
 export const navLinks = [

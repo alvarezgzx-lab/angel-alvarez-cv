@@ -32,8 +32,8 @@ const svg = `
 
   <text x="88" y="330" class="display" font-size="76" fill="${CREAM}">Ángel Álvarez</text>
 
-  <text x="90" y="390" class="body" font-size="30" fill="${CREAM}" opacity="0.9">Capacitación y Desarrollo · People Analytics</text>
-  <text x="90" y="430" class="body" font-size="30" fill="${CREAM}" opacity="0.9">Desarrollo Organizacional</text>
+  <text x="90" y="390" class="body" font-size="30" fill="${CREAM}" opacity="0.9">People Analytics · Capacitación y Desarrollo</text>
+  <text x="90" y="430" class="body" font-size="30" fill="${CREAM}" opacity="0.9">Reclutamiento y Desarrollo Organizacional</text>
 
   <rect x="90" y="480" width="220" height="46" rx="23" fill="${RUST}" />
   <text x="200" y="509" class="mono" font-size="20" fill="${CREAM}" text-anchor="middle">CV DIGITAL</text>
