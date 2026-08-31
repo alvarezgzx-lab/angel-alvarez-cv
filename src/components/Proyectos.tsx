@@ -1,5 +1,4 @@
 import ExternalLink from './ExternalLink'
-import LinkedInEmbed from './LinkedInEmbed'
 import { proyectosPublicaciones } from '../data/content'
 
 export default function Proyectos() {
@@ -57,7 +56,17 @@ export default function Proyectos() {
               {proyecto.embeds && proyecto.embeds.length > 0 && (
                 <div className="mt-6 flex flex-wrap gap-4">
                   {proyecto.embeds.map((embed) => (
-                    <LinkedInEmbed key={embed.src} embed={embed} />
+                    <div key={embed.src} className="w-full max-w-[504px] overflow-hidden rounded-md">
+                      <iframe
+                        src={embed.src}
+                        title={embed.title}
+                        width="100%"
+                        height={embed.height}
+                        loading="lazy"
+                        allowFullScreen
+                        className="block w-full border-0"
+                      />
+                    </div>
                   ))}
                 </div>
               )}
