@@ -12,10 +12,10 @@ export default function ReconocimientoInstitucional() {
           Reconocimiento Institucional
         </h2>
 
-        <div className="mt-8 flex flex-wrap justify-center gap-8">
+        <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2">
           {reconocimientoInstitucional.map((item) => (
-            <div key={item.url} className="flex w-full max-w-[504px] flex-col items-center gap-3">
-              <p className="text-center font-mono text-xs uppercase tracking-wide text-sage-ink">
+            <div key={item.url} className="flex flex-col items-center gap-3">
+              <p className="flex min-h-[2rem] items-center text-center font-mono text-xs uppercase tracking-wide text-sage-ink">
                 {item.label}
               </p>
               <div className="w-full overflow-hidden rounded-md border border-navy/10 bg-cream shadow-sm">
