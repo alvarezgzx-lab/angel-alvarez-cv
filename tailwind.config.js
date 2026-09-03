@@ -20,6 +20,11 @@ export default {
         // Calibrated against the *tinted* surfaces it actually sits on
         // (sage/10 chips, navy/3% section backgrounds), not pure cream.
         'sage-ink': '#546C56',
+        // Lightened for text use on navy (the page background) — mirrors
+        // rust-ink/sage-ink but going the other direction, since a *darker*
+        // tone loses contrast rather than gains it against a dark backdrop.
+        'rust-light': '#CB886E',
+        'sage-light': '#839F86',
       },
       fontFamily: {
         display: ['Fraunces', 'Georgia', 'serif'],
@@ -28,6 +33,15 @@ export default {
       },
       transitionDuration: {
         DEFAULT: '200ms',
+      },
+      boxShadow: {
+        // Soft bevel for cream cards floating on the navy page background:
+        // a 1px inner highlight along the top edge (catches light, reads as
+        // a subtle embossed rim) plus a navy-tinted, low-contrast drop
+        // shadow for lift. Deliberately restrained — no borders/gradients —
+        // so it stays elegant rather than skeuomorphic.
+        bevel:
+          'inset 0 1px 0 0 rgba(255,255,255,0.6), 0 14px 30px -12px rgba(8,17,28,0.55)',
       },
     },
   },

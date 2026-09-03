@@ -13,7 +13,7 @@ import Footer from './components/Footer'
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-cream font-body text-navy">
+    <div className="min-h-screen bg-navy font-body text-cream">
       <a
         href="#inicio"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-rust-ink focus:px-4 focus:py-2 focus:text-cream"

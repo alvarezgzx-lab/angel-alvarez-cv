@@ -3,16 +3,16 @@ import { formacion } from '../data/content'
 
 export default function Formacion() {
   return (
-    <section id="formacion" className="bg-navy/[0.03] px-5 py-16 sm:px-8 sm:py-24">
+    <section id="formacion" className="px-5 py-16 sm:px-8 sm:py-24">
       <div className="mx-auto max-w-4xl">
-        <h2 className="font-display text-3xl font-semibold text-navy sm:text-4xl">Formación</h2>
+        <h2 className="font-display text-3xl font-semibold text-cream sm:text-4xl">Formación</h2>
 
         <ul className="mt-8 space-y-6">
           {formacion.map((item, i) => (
             <li key={item.titulo}>
               <RevealCard
                 index={i}
-                className="rounded-lg border border-navy/10 bg-cream p-6 shadow-sm"
+                className="rounded-lg border border-navy/10 bg-cream p-6 shadow-bevel"
               >
                 <p className="font-mono text-xs uppercase tracking-wide text-sage-ink">
                   {item.fecha}

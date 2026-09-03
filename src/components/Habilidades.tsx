@@ -7,13 +7,17 @@ export default function Habilidades() {
   return (
     <section id="habilidades" className="px-5 py-16 sm:px-8 sm:py-24">
       <div className="mx-auto max-w-4xl">
-        <h2 className="font-display text-3xl font-semibold text-navy sm:text-4xl">
+        <h2 className="font-display text-3xl font-semibold text-cream sm:text-4xl">
           Habilidades
         </h2>
 
         <div className="mt-8 grid gap-6 sm:grid-cols-2">
           {categorias.map(([categoria, items], i) => (
-            <RevealCard key={categoria} index={i} className="rounded-lg border border-navy/10 bg-cream p-6">
+            <RevealCard
+              key={categoria}
+              index={i}
+              className="rounded-lg border border-navy/10 bg-cream p-6 shadow-bevel"
+            >
               <h3 className="font-body text-sm font-semibold uppercase tracking-wide text-navy">
                 {categoria}
               </h3>
@@ -31,7 +35,10 @@ export default function Habilidades() {
           ))}
         </div>
 
-        <RevealCard index={categorias.length} className="mt-6 rounded-lg border border-navy/10 bg-cream p-6">
+        <RevealCard
+          index={categorias.length}
+          className="mt-6 rounded-lg border border-navy/10 bg-cream p-6 shadow-bevel"
+        >
           <h3 className="font-body text-sm font-semibold uppercase tracking-wide text-navy">
             Idiomas
           </h3>

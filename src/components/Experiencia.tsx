@@ -41,26 +41,29 @@ export default function Experiencia() {
   }, [])
 
   return (
-    <section id="experiencia" className="bg-navy/[0.03] px-5 py-16 sm:px-8 sm:py-24">
+    <section id="experiencia" className="px-5 py-16 sm:px-8 sm:py-24">
       <div className="mx-auto max-w-4xl">
-        <h2 className="font-display text-3xl font-semibold text-navy sm:text-4xl">
+        <h2 className="font-display text-3xl font-semibold text-cream sm:text-4xl">
           Experiencia profesional
         </h2>
 
         <ol ref={listRef} className="relative mt-10 pl-6 sm:pl-8">
-          <span aria-hidden="true" className="absolute inset-y-0 left-0 w-0.5 bg-sage/20" />
+          <span aria-hidden="true" className="absolute inset-y-0 left-0 w-0.5 bg-cream/15" />
           <span
             aria-hidden="true"
             className="absolute left-0 top-0 h-full w-0.5 origin-top bg-rust-ui"
             style={{ transform: `scaleY(${progress})` }}
           />
           {experiencia.map((item, i) => (
-            <li key={`${item.puesto}-${item.organizacion}`} className="relative pb-10 last:pb-0">
+            <li key={`${item.puesto}-${item.organizacion}`} className="relative pb-6 last:pb-0">
               <span
                 aria-hidden="true"
-                className="absolute -left-[calc(1.5rem+5px)] top-1.5 h-3 w-3 rounded-full border-2 border-rust-ui bg-cream sm:-left-[calc(2rem+5px)]"
+                className="absolute -left-[calc(1.5rem+5px)] top-[1.875rem] h-3 w-3 rounded-full border-2 border-rust-ui bg-cream sm:-left-[calc(2rem+5px)]"
               />
-              <RevealCard index={i}>
+              <RevealCard
+                index={i}
+                className="rounded-lg border border-navy/10 bg-cream p-6 shadow-bevel"
+              >
                 <p className="font-mono text-xs uppercase tracking-wide text-sage-ink">
                   {item.fecha}
                 </p>

@@ -5,7 +5,7 @@ export default function Certificaciones() {
   return (
     <section id="certificaciones" className="px-5 py-16 sm:px-8 sm:py-24">
       <div className="mx-auto max-w-4xl">
-        <h2 className="font-display text-3xl font-semibold text-navy sm:text-4xl">
+        <h2 className="font-display text-3xl font-semibold text-cream sm:text-4xl">
           Licencias y Certificaciones
         </h2>
 
@@ -14,7 +14,7 @@ export default function Certificaciones() {
             <RevealCard
               key={cert.src}
               index={i}
-              className="w-full max-w-[504px] rounded-md border border-navy/10 shadow-sm"
+              className="w-full max-w-[504px] rounded-md border border-navy/10 shadow-bevel"
             >
               <iframe
                 src={cert.src}

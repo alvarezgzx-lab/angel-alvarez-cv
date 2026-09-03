@@ -56,9 +56,15 @@ node scripts/generate-favicons.mjs
 
 Para reemplazar la foto de perfil: coloca el nuevo archivo en `public/images/_angel-photo-source.jpg`, ajusta la ruta en `scripts/generate-photo.mjs` si hace falta, y corre `node scripts/generate-photo.mjs` (recorta a 480×480 y la convierte a WebP; borra el archivo fuente al terminar).
 
+## Sistema de color
+
+El fondo de página es `navy` en todas las secciones (definido en `src/App.tsx` y `body` en `src/index.css`); las tarjetas de contenido (Formación, Proyectos, Habilidades, Experiencia, Perfil, embeds) mantienen su `bg-cream` de siempre, así que se leen como piezas claras flotando sobre el fondo oscuro. Cada tarjeta usa `shadow-bevel` (definido en `tailwind.config.js`): un highlight interior de 1px en el borde superior más una sombra suave con tinte navy — el "biselado" sutil que le da profundidad sin bordes ni degradados llamativos.
+
+Como el texto que antes vivía directamente sobre `cream` ahora puede estar directamente sobre `navy` (fuera de las tarjetas — títulos de sección, el Hero, etiquetas de Reconocimiento Institucional), se agregaron dos tokens calibrados para AA sobre navy: `rust-light` y `sage-light` (>=4.5:1), hermanos de los `-ink` que ya existían para texto sobre cream. Nunca mezclar: `-ink` es para texto dentro de una tarjeta cream, `-light` es para texto que cae directo sobre el fondo navy.
+
 ## Efectos de scroll
 
-- **Reveal por tarjeta** (`RevealCard.tsx`): cada tarjeta/entrada arranca cubierta por un bloque de color sólido (rotando entre `rust-ink`, `navy` y `sage-ink` según su índice); al entrar en el viewport (`IntersectionObserver`), el bloque se desliza hacia afuera revelando el contenido. Respeta `prefers-reduced-motion` (se muestra todo directamente, sin animar).
+- **Reveal por tarjeta** (`RevealCard.tsx`): cada tarjeta/entrada arranca cubierta por un bloque de color sólido (rotando entre `rust-ink` y `sage-ink` según su índice — `navy` se excluyó del ciclo porque ahora es el color de fondo de la página, sería invisible); al entrar en el viewport (`IntersectionObserver`), el bloque se desliza hacia afuera revelando el contenido. Respeta `prefers-reduced-motion` (se muestra todo directamente, sin animar).
 - **Nav activo (scrollspy)** (`Nav.tsx`): un segundo `IntersectionObserver` detecta qué sección está más cerca del top del viewport y subraya el link correspondiente en el nav.
 - **Línea de tiempo animada** (`Experiencia.tsx`): la línea vertical de la timeline se "dibuja" (`scaleY`) en proporción a cuánto has scrolleado la sección, vía un listener de scroll + `requestAnimationFrame`.
 

@@ -6,7 +6,7 @@ export default function Proyectos() {
   return (
     <section id="proyectos" className="px-5 py-16 sm:px-8 sm:py-24">
       <div className="mx-auto max-w-4xl">
-        <h2 className="font-display text-3xl font-semibold text-navy sm:text-4xl">
+        <h2 className="font-display text-3xl font-semibold text-cream sm:text-4xl">
           Proyectos y Publicaciones
         </h2>
 
@@ -15,7 +15,7 @@ export default function Proyectos() {
             <li key={proyecto.titulo}>
               <RevealCard
                 index={i}
-                className="rounded-lg border border-navy/10 bg-cream p-6 shadow-sm sm:p-8"
+                className="rounded-lg border border-navy/10 bg-cream p-6 shadow-bevel sm:p-8"
               >
                 <p className="font-mono text-xs uppercase tracking-wide text-sage-ink">
                   {proyecto.fecha}

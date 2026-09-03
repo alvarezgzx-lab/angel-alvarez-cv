@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 
-const PALETTE = ['bg-rust-ink', 'bg-navy', 'bg-sage-ink'] as const
+// `navy` is deliberately excluded — the page background is navy, so a navy
+// wipe block would be invisible against it.
+const PALETTE = ['bg-rust-ink', 'bg-sage-ink'] as const
 
 interface RevealCardProps {
   children: ReactNode
