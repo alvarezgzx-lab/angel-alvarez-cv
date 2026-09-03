@@ -28,7 +28,6 @@ export default function Contacto() {
         <div className="mt-10 flex flex-col items-center gap-8">
           <a
             href={`mailto:${persona.email}`}
-            aria-label="Enviar correo a Ángel Álvarez"
             className="rounded-md bg-rust-ink px-8 py-3 text-center font-body font-semibold text-cream shadow-sm transition-colors duration-200 hover:bg-rust-ink/90"
           >
             Email

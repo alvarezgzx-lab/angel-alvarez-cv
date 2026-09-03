@@ -7,7 +7,7 @@ export default function Habilidades() {
   return (
     <section id="habilidades" className="px-5 py-16 sm:px-8 sm:py-24">
       <div className="mx-auto max-w-4xl">
-        <h2 className="font-display text-3xl font-semibold text-cream sm:text-4xl">
+        <h2 className="text-center font-display text-3xl font-semibold text-cream sm:text-left sm:text-4xl">
           Habilidades
         </h2>
 

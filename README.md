@@ -64,11 +64,14 @@ Como el texto que antes vivía directamente sobre `cream` ahora puede estar dire
 
 ## Efectos de scroll
 
-- **Reveal por tarjeta** (`RevealCard.tsx`): cada tarjeta/entrada arranca cubierta por un bloque de color sólido (rotando entre `rust-ink` y `sage-ink` según su índice — `navy` se excluyó del ciclo porque ahora es el color de fondo de la página, sería invisible); al entrar en el viewport (`IntersectionObserver`), el bloque se desliza hacia afuera revelando el contenido. Respeta `prefers-reduced-motion` (se muestra todo directamente, sin animar).
+- **Reveal por tarjeta** (`RevealCard.tsx`, hook compartido `useInView`): cada tarjeta/entrada arranca cubierta por un bloque de color sólido (rotando entre `rust-ink` y `sage-ink` según su índice — `navy` se excluyó del ciclo porque ahora es el color de fondo de la página, sería invisible); al entrar en el viewport (`IntersectionObserver`), el bloque se desliza hacia afuera revelando el contenido. Umbral calibrado (`threshold: 0.3`, `rootMargin: -20%`) para que la tarjeta ya esté bien entrada en pantalla cuando se dispara — si se revela demasiado pronto (justo al asomar por el borde inferior), el usuario nunca alcanza a percibir el barrido. Respeta `prefers-reduced-motion`.
+- **Perfil/Objetivo** (`Perfil.tsx`): a propósito NO son tarjetas — funcionan como una continuación editorial del Hero (mismo fondo navy, sin caja), con tipografía serif itálica más grande que el resto del sitio para distinguirse, un `text-shadow` suave que les da sensación de flotar, y un fundido sutil (opacidad + `rotateX` leve) al entrar en viewport vía el mismo `useInView`.
 - **Nav activo (scrollspy)** (`Nav.tsx`): un segundo `IntersectionObserver` detecta qué sección está más cerca del top del viewport y subraya el link correspondiente en el nav.
 - **Línea de tiempo animada** (`Experiencia.tsx`): la línea vertical de la timeline se "dibuja" (`scaleY`) en proporción a cuánto has scrolleado la sección, vía un listener de scroll + `requestAnimationFrame`.
 
-Ninguno de los tres agrega dependencias nuevas — todo usa APIs nativas del navegador.
+Ninguno de estos agrega dependencias nuevas — todo usa APIs nativas del navegador.
+
+**Descartado:** se probó `scroll-snap-type: y` en mobile (para que cada swipe "pagine" a la siguiente sección). Confirmado con Lighthouse en A/B que rompía por completo la medición de Performance (LCP/TBT/TTI quedaban en `null` y la categoría caía a 0) — Chrome headless no logra calcular esas métricas con scroll-snap activo en el `<html>`. Se revirtió; solo quedó el encabezado centrado en mobile (`text-center sm:text-left` en cada `<h2>`), que sí es seguro.
 
 ## Desplegar
 

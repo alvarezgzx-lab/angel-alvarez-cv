@@ -5,7 +5,9 @@ export default function Formacion() {
   return (
     <section id="formacion" className="px-5 py-16 sm:px-8 sm:py-24">
       <div className="mx-auto max-w-4xl">
-        <h2 className="font-display text-3xl font-semibold text-cream sm:text-4xl">Formación</h2>
+        <h2 className="text-center font-display text-3xl font-semibold text-cream sm:text-left sm:text-4xl">
+          Formación
+        </h2>
 
         <ul className="mt-8 space-y-6">
           {formacion.map((item, i) => (
