@@ -58,3 +58,12 @@ body {
   outline: 2px solid #CA653E;
   outline-offset: 3px;
 }
+
+/* LinkedIn's badge.js appends the enhanced iframe as a sibling of the
+   fallback text link instead of replacing it, and only ships that
+   behavior bundled with a stylesheet we don't load. Hide the fallback
+   once data-rendered="true" confirms the iframe loaded; it stays visible
+   otherwise (script blocked, JS disabled), preserving the fallback. */
+.LI-profile-badge[data-rendered='true'] > .badge-base__link {
+  display: none;
+}
