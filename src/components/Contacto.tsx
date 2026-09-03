@@ -7,8 +7,8 @@ export default function Contacto() {
       <div className="mx-auto max-w-4xl text-center">
         <h2 className="font-display text-3xl font-semibold sm:text-4xl">Contacto</h2>
         <p className="mx-auto mt-4 max-w-xl font-body text-cream/80">
-          ¿Conversamos sobre una oportunidad en Capacitación, People Analytics o Desarrollo
-          Organizacional?
+          ¿Conversamos sobre una oportunidad en People Analytics, Workforce Enablement o
+          Estrategia de Negocio?
         </p>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
