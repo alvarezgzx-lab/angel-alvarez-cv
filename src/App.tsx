@@ -3,6 +3,7 @@ import Nav from './components/Nav'
 import Hero from './components/Hero'
 import Perfil from './components/Perfil'
 import Formacion from './components/Formacion'
+import Certificaciones from './components/Certificaciones'
 import Proyectos from './components/Proyectos'
 import Experiencia from './components/Experiencia'
 import Habilidades from './components/Habilidades'
@@ -23,6 +24,7 @@ export default function App() {
         <Hero />
         <Perfil />
         <Formacion />
+        <Certificaciones />
         <Proyectos />
         <Experiencia />
         <Habilidades />

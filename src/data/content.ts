@@ -54,6 +54,15 @@ export interface Embed {
   width: number
 }
 
+export const licenciasCertificaciones: Embed[] = [
+  {
+    title: 'Certificado de finalización — Workforce Planning Strategy (Microsoft, vía Coursera)',
+    src: 'https://www.linkedin.com/embed/feed/update/urn:li:share:7501379217348096000?collapsed=1',
+    height: 539,
+    width: 504,
+  },
+]
+
 export interface Proyecto {
   titulo: string
   fecha: string
@@ -208,6 +217,7 @@ export const navLinks = [
   { href: '#inicio', label: 'Inicio' },
   { href: '#perfil', label: 'Perfil' },
   { href: '#formacion', label: 'Formación' },
+  { href: '#certificaciones', label: 'Licencias y Certificaciones' },
   { href: '#proyectos', label: 'Proyectos y Publicaciones' },
   { href: '#experiencia', label: 'Experiencia' },
   { href: '#habilidades', label: 'Habilidades' },
