@@ -4,6 +4,7 @@ import { navLinks } from '../data/content'
 export default function Nav() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [activeHref, setActiveHref] = useState('#inicio')
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -21,6 +22,29 @@ export default function Nav() {
     return () => window.removeEventListener('keydown', onKey)
   }, [open])
 
+  useEffect(() => {
+    const sections = navLinks
+      .map((link) => document.getElementById(link.href.slice(1)))
+      .filter((el): el is HTMLElement => el !== null)
+
+    if (sections.length === 0) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((entry) => entry.isIntersecting)
+        if (visible.length === 0) return
+        const topMost = visible.reduce((a, b) =>
+          a.boundingClientRect.top < b.boundingClientRect.top ? a : b,
+        )
+        setActiveHref(`#${topMost.target.id}`)
+      },
+      { rootMargin: '-20% 0px -70% 0px', threshold: 0 },
+    )
+
+    sections.forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <header
       className={`sticky top-0 z-50 w-full transition-colors duration-200 ${
@@ -33,8 +57,15 @@ export default function Nav() {
       >
         <a
           href="#inicio"
-          className="font-display text-lg font-semibold text-cream underline-offset-4 transition-colors duration-200 hover:underline hover:decoration-rust-ui"
+          className="flex items-center gap-2.5 font-display text-lg font-semibold text-cream underline-offset-4 transition-colors duration-200 hover:underline hover:decoration-rust-ui"
         >
+          <img
+            src="/images/angel-photo.webp"
+            alt=""
+            width={64}
+            height={64}
+            className="h-8 w-8 rounded-full border border-cream/30 object-cover"
+          />
           Ángel Álvarez
         </a>
 
@@ -43,7 +74,10 @@ export default function Nav() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="underline-offset-4 transition-colors duration-200 hover:underline hover:decoration-rust-ui"
+                aria-current={activeHref === link.href ? 'true' : undefined}
+                className={`underline-offset-4 transition-colors duration-200 hover:underline hover:decoration-rust-ui ${
+                  activeHref === link.href ? 'underline decoration-rust-ui' : ''
+                }`}
               >
                 {link.label}
               </a>
@@ -91,7 +125,10 @@ export default function Nav() {
               <a
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="block px-5 py-3 transition-colors duration-200 hover:bg-navy/60 sm:px-8"
+                aria-current={activeHref === link.href ? 'true' : undefined}
+                className={`block px-5 py-3 transition-colors duration-200 hover:bg-navy/60 sm:px-8 ${
+                  activeHref === link.href ? 'bg-navy/60' : ''
+                }`}
               >
                 {link.label}
               </a>

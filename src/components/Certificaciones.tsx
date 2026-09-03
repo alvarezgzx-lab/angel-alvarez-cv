@@ -1,3 +1,4 @@
+import RevealCard from './RevealCard'
 import { licenciasCertificaciones } from '../data/content'
 
 export default function Certificaciones() {
@@ -9,10 +10,11 @@ export default function Certificaciones() {
         </h2>
 
         <div className="mt-8 flex flex-wrap justify-center gap-6">
-          {licenciasCertificaciones.map((cert) => (
-            <div
+          {licenciasCertificaciones.map((cert, i) => (
+            <RevealCard
               key={cert.src}
-              className="w-full max-w-[504px] overflow-hidden rounded-md border border-navy/10 shadow-sm"
+              index={i}
+              className="w-full max-w-[504px] rounded-md border border-navy/10 shadow-sm"
             >
               <iframe
                 src={cert.src}
@@ -23,7 +25,7 @@ export default function Certificaciones() {
                 allowFullScreen
                 className="block w-full border-0"
               />
-            </div>
+            </RevealCard>
           ))}
         </div>
       </div>

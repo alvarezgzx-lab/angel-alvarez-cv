@@ -1,13 +1,8 @@
 export const persona = {
   name: 'Ángel Álvarez',
   fullName: 'Jesús Ángel Álvarez González',
-  headline: 'People Analytics · Capacitación y Desarrollo · Reclutamiento y Desarrollo Organizacional',
-  targetRoles: [
-    'People Analytics',
-    'Capacitación y Desarrollo',
-    'Reclutamiento y Desarrollo Organizacional',
-    'Business Intelligence',
-  ],
+  headline:
+    'Learning Analyst (Associate) | Workforce Enablement & Business Strategy | Cross-Functional HR Operations | Data & Metrics',
   location: 'Nuevo León, México',
   email: 'alvarezgzx@gmail.com',
   linkedin: 'https://linkedin.com/in/angelalvarezg97',

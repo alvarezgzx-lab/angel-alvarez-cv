@@ -29,16 +29,20 @@ npm run preview
 ```
 index.html               # SEO: meta tags, Open Graph, Twitter Card, JSON-LD, favicon
 public/
-  Angel-Alvarez-CV.pdf   # CV descargable (botón "Ver CV en PDF")
-  og-image.png           # imagen 1200×630 para redes sociales
+  Angel-Alvarez-CV.pdf    # CV descargable (botón "Ver CV en PDF"), sin teléfono
+  og-image.png             # imagen 1200×630 para redes sociales
   favicon.svg / favicon-32.png / apple-touch-icon.png
+  images/angel-photo.webp  # foto de perfil (Hero + avatar del nav)
 src/
   data/content.ts         # única fuente de verdad del contenido (espeja el JSON del brief)
   components/              # una sección = un componente
+    RevealCard.tsx          # tarjeta cubierta por un bloque de color que se desliza al hacer scroll
   App.tsx                  # ensambla las secciones
 scripts/
   generate-og-image.mjs    # regenera public/og-image.png (usa sharp)
   generate-favicons.mjs    # regenera los favicons (usa sharp)
+  generate-photo.mjs       # optimiza public/images/angel-photo.webp desde un source (usa sharp)
+  generate_cv_pdf.py       # regenera public/Angel-Alvarez-CV.pdf (usa reportlab, sin teléfono)
 ```
 
 Para editar el contenido del CV, modifica únicamente [`src/data/content.ts`](src/data/content.ts) — todos los componentes leen de ahí.
@@ -49,6 +53,16 @@ Si cambias el diseño de la imagen social o el favicon, edita el SVG dentro de `
 node scripts/generate-og-image.mjs
 node scripts/generate-favicons.mjs
 ```
+
+Para reemplazar la foto de perfil: coloca el nuevo archivo en `public/images/_angel-photo-source.jpg`, ajusta la ruta en `scripts/generate-photo.mjs` si hace falta, y corre `node scripts/generate-photo.mjs` (recorta a 480×480 y la convierte a WebP; borra el archivo fuente al terminar).
+
+## Efectos de scroll
+
+- **Reveal por tarjeta** (`RevealCard.tsx`): cada tarjeta/entrada arranca cubierta por un bloque de color sólido (rotando entre `rust-ink`, `navy` y `sage-ink` según su índice); al entrar en el viewport (`IntersectionObserver`), el bloque se desliza hacia afuera revelando el contenido. Respeta `prefers-reduced-motion` (se muestra todo directamente, sin animar).
+- **Nav activo (scrollspy)** (`Nav.tsx`): un segundo `IntersectionObserver` detecta qué sección está más cerca del top del viewport y subraya el link correspondiente en el nav.
+- **Línea de tiempo animada** (`Experiencia.tsx`): la línea vertical de la timeline se "dibuja" (`scaleY`) en proporción a cuánto has scrolleado la sección, vía un listener de scroll + `requestAnimationFrame`.
+
+Ninguno de los tres agrega dependencias nuevas — todo usa APIs nativas del navegador.
 
 ## Desplegar
 
@@ -78,7 +92,7 @@ Ya está desplegado y conectado (ver arriba) — un `git push` a `master` re-des
 
 - Si en algún momento conectas un dominio propio, actualiza las URLs absolutas en `index.html`, `public/robots.txt` y `public/sitemap.xml` (canonical, `og:url`, `og:image`, sitemap) — búscalas con `grep -rn "angel-alvarez-cv.vercel.app" index.html public/`.
 - Valida los meta tags de Open Graph con el [Sharing Debugger de Meta](https://developers.facebook.com/tools/debug/) y el [Post Inspector de LinkedIn](https://www.linkedin.com/post-inspector/).
-- Lighthouse en el build de producción: 98 Performance / 100 Accessibility / 100 Best Practices / 100 SEO (medido localmente contra `npm run preview`; los números del servidor de `npm run dev` no son representativos).
+- Lighthouse en el build de producción: 97 Performance / 100 Accessibility / 75 Best Practices / 100 SEO (medido localmente contra `npm run preview`; los números del servidor de `npm run dev` no son representativos). El Best Practices quedó en 75 (antes 100) porque los embeds de LinkedIn cargan por defecto y ponen sus propias cookies de terceros apenas carga la página — decisión explícita para que las publicaciones se vean sin necesidad de un clic.
 
 ## Privacidad
 

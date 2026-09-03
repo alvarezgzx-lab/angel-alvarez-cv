@@ -1,4 +1,5 @@
 import ExternalLink from './ExternalLink'
+import RevealCard from './RevealCard'
 import { reconocimientoInstitucional } from '../data/content'
 
 export default function ReconocimientoInstitucional() {
@@ -13,12 +14,15 @@ export default function ReconocimientoInstitucional() {
         </h2>
 
         <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2">
-          {reconocimientoInstitucional.map((item) => (
+          {reconocimientoInstitucional.map((item, i) => (
             <div key={item.url} className="flex flex-col items-center gap-3">
               <p className="flex min-h-[2rem] items-center text-center font-mono text-xs uppercase tracking-wide text-sage-ink">
                 {item.label}
               </p>
-              <div className="w-full overflow-hidden rounded-md border border-navy/10 bg-cream shadow-sm">
+              <RevealCard
+                index={i}
+                className="w-full rounded-md border border-navy/10 bg-cream shadow-sm"
+              >
                 <iframe
                   src={item.embed.src}
                   title={item.embed.title}
@@ -28,7 +32,7 @@ export default function ReconocimientoInstitucional() {
                   allowFullScreen
                   className="block w-full border-0"
                 />
-              </div>
+              </RevealCard>
               <ExternalLink
                 href={item.url}
                 className="font-mono text-xs text-rust-ink underline-offset-4 transition-colors duration-200 hover:underline"
