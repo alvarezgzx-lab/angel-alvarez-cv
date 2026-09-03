@@ -32,7 +32,7 @@ public/
   Angel-Alvarez-CV.pdf    # CV descargable (botón "Ver CV en PDF"), sin teléfono
   og-image.png             # imagen 1200×630 para redes sociales
   favicon.svg / favicon-32.png / apple-touch-icon.png
-  images/angel-photo.webp  # foto de perfil (Hero + avatar del nav)
+  images/angel-photo.webp  # foto de perfil (aparece en la tarjeta de Perfil)
 src/
   data/content.ts         # única fuente de verdad del contenido (espeja el JSON del brief)
   components/              # una sección = un componente
@@ -65,7 +65,8 @@ Como el texto que antes vivía directamente sobre `cream` ahora puede estar dire
 ## Efectos de scroll
 
 - **Reveal por tarjeta** (`RevealCard.tsx`, hook compartido `useInView`): cada tarjeta/entrada arranca cubierta por un bloque de color sólido (rotando entre `rust-ink` y `sage-ink` según su índice — `navy` se excluyó del ciclo porque ahora es el color de fondo de la página, sería invisible); al entrar en el viewport (`IntersectionObserver`), el bloque se desliza hacia afuera revelando el contenido. Umbral calibrado (`threshold: 0.3`, `rootMargin: -20%`) para que la tarjeta ya esté bien entrada en pantalla cuando se dispara — si se revela demasiado pronto (justo al asomar por el borde inferior), el usuario nunca alcanza a percibir el barrido. Respeta `prefers-reduced-motion`.
-- **Perfil/Objetivo** (`Perfil.tsx`): a propósito NO son tarjetas — funcionan como una continuación editorial del Hero (mismo fondo navy, sin caja), con tipografía serif itálica más grande que el resto del sitio para distinguirse, un `text-shadow` suave que les da sensación de flotar, y un fundido sutil (opacidad + `rotateX` leve) al entrar en viewport vía el mismo `useInView`.
+- **Hero** (`Hero.tsx`): centrado, sin foto, tipografía Fraunces itálica sin negrita (el peso normal del `@font-face`, ni `font-semibold` ni `font-bold`) — buscando un tono editorial y sutil en vez del título grande y en negritas de antes.
+- **Perfil/Objetivo** (`Perfil.tsx`): única tarjeta "transparente" del sitio — fondo `rust/10` con `backdrop-blur-sm` y borde `rust/20` (un tinte cálido apenas visible sobre el navy, no un `bg-cream` sólido como el resto de las tarjetas), para leerse como una pieza aparte y no como una sección más. Misma tipografía itálica sin negrita que el Hero. Al entrar en viewport (`useInView`), la tarjeta completa hace un fundido + ascenso, y la foto de perfil (antes en el Hero) gira 180° y escala desde 0.4 hasta su tamaño/rotación final — un eco visual del giro que hace el nombre al convertirse en el monograma "AA" del nav.
 - **Nav activo (scrollspy)** (`Nav.tsx`): un segundo `IntersectionObserver` detecta qué sección está más cerca del top del viewport y subraya el link correspondiente en el nav.
 - **Línea de tiempo animada** (`Experiencia.tsx`): la línea vertical de la timeline se "dibuja" (`scaleY`) en proporción a cuánto has scrolleado la sección, vía un listener de scroll + `requestAnimationFrame`.
 
