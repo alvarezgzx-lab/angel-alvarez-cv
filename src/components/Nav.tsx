@@ -14,6 +14,10 @@ export default function Nav() {
   }, [])
 
   useEffect(() => {
+    if (!scrolled) setOpen(false)
+  }, [scrolled])
+
+  useEffect(() => {
     if (!open) return
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setOpen(false)
@@ -47,26 +51,35 @@ export default function Nav() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-colors duration-200 ${
-        scrolled ? 'bg-navy/95 backdrop-blur shadow-md' : 'bg-navy'
+      className={`sticky top-0 z-50 w-full transition-transform duration-300 ease-out ${
+        scrolled ? 'translate-y-0 bg-navy/95 shadow-md backdrop-blur' : '-translate-y-full bg-navy'
       }`}
+      inert={!scrolled}
     >
       <nav
         aria-label="Navegación principal"
         className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8"
       >
-        <a
-          href="#inicio"
-          className="flex items-center gap-2.5 font-display text-lg font-semibold text-cream underline-offset-4 transition-colors duration-200 hover:underline hover:decoration-rust-ui"
-        >
-          <img
-            src="/images/angel-photo.webp"
-            alt=""
-            width={64}
-            height={64}
-            className="h-8 w-8 rounded-full border border-cream/30 object-cover"
-          />
-          Ángel Álvarez
+        <a href="#inicio" className="relative flex h-9 w-44 items-center md:w-auto md:min-w-[9rem]">
+          <span
+            className={`whitespace-nowrap font-display text-lg font-semibold text-cream underline-offset-4 transition-all duration-500 ease-out hover:underline hover:decoration-rust-ui md:absolute md:left-0 ${
+              scrolled
+                ? 'md:pointer-events-none md:-rotate-45 md:scale-75 md:opacity-0'
+                : 'md:rotate-0 md:scale-100 md:opacity-100'
+            }`}
+          >
+            Ángel Álvarez
+          </span>
+          <span
+            aria-hidden="true"
+            className={`hidden h-9 w-9 items-center justify-center rounded-full bg-rust-ink font-display text-xs font-bold text-cream transition-all duration-500 ease-out md:absolute md:left-0 md:inline-flex ${
+              scrolled
+                ? 'md:rotate-0 md:scale-100 md:opacity-100'
+                : 'md:pointer-events-none md:rotate-45 md:scale-50 md:opacity-0'
+            }`}
+          >
+            AA
+          </span>
         </a>
 
         <ul className="hidden items-center gap-6 font-mono text-xs uppercase tracking-wide text-cream/90 md:flex">
