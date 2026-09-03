@@ -34,42 +34,6 @@ export default function Proyectos() {
                   </span>
                 </ExternalLink>
               </div>
-
-              {proyecto.reconocimientos && proyecto.reconocimientos.length > 0 && (
-                <ul className="mt-4 flex flex-wrap gap-2">
-                  {proyecto.reconocimientos.map((r) => (
-                    <li key={r.url}>
-                      <ExternalLink
-                        href={r.url}
-                        className="inline-flex items-center rounded-full border border-sage/40 bg-sage/10 px-3 py-1.5 font-mono text-xs text-sage-ink transition-colors duration-200 hover:border-sage hover:bg-sage/20"
-                      >
-                        {r.label}
-                        <span aria-hidden="true" className="ml-1">
-                          ↗
-                        </span>
-                      </ExternalLink>
-                    </li>
-                  ))}
-                </ul>
-              )}
-
-              {proyecto.embeds && proyecto.embeds.length > 0 && (
-                <div className="mt-6 flex flex-wrap gap-4">
-                  {proyecto.embeds.map((embed) => (
-                    <div key={embed.src} className="w-full max-w-[504px] overflow-hidden rounded-md">
-                      <iframe
-                        src={embed.src}
-                        title={embed.title}
-                        width="100%"
-                        height={embed.height}
-                        loading="lazy"
-                        allowFullScreen
-                        className="block w-full border-0"
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
             </li>
           ))}
         </ul>

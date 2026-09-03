@@ -32,7 +32,7 @@ export const formacion: Formacion[] = [
     titulo: 'Licenciatura en Educación y Administración de Centros Educativos',
     institucion: 'Universidad Metropolitana de Monterrey (UMM)',
     fecha: 'Titulado, agosto 2025',
-    nota: 'Proyecto de titulación: D.A.T.A. — Development of AI Teaching & Automation; ecosistema multiagente de IA conversacional con piloto institucional de 86–98% de valoración docente, en colaboración con Microsoft y reconocido por CANIETI Noreste (ver Proyectos y Publicaciones).',
+    nota: 'Proyecto de titulación: D.A.T.A. — Development of AI Teaching & Automation; ecosistema multiagente de IA conversacional con piloto institucional de 86–98% de valoración docente, en colaboración con Microsoft y reconocido por CANIETI Noreste (ver Proyectos y Publicaciones y Reconocimiento Institucional).',
   },
   {
     titulo: 'Licenciatura en Economía',
@@ -63,13 +63,40 @@ export const licenciasCertificaciones: Embed[] = [
   },
 ]
 
+export interface Reconocimiento {
+  label: string
+  url: string
+  embed: Embed
+}
+
+export const reconocimientoInstitucional: Reconocimiento[] = [
+  {
+    label: 'Reconocido públicamente por la UMM (colaboración con Microsoft)',
+    url: 'https://lnkd.in/p/ehyHKwxv',
+    embed: {
+      title: 'Publicación de LinkedIn — reconocimiento de la UMM',
+      src: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7310043022786744320?collapsed=1',
+      height: 627,
+      width: 504,
+    },
+  },
+  {
+    label: 'Reconocido públicamente por CANIETI Noreste',
+    url: 'https://lnkd.in/p/ea5sMYBe',
+    embed: {
+      title: 'Publicación de LinkedIn — reconocimiento de CANIETI Noreste',
+      src: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7321006183450894336?collapsed=1',
+      height: 627,
+      width: 504,
+    },
+  },
+]
+
 export interface Proyecto {
   titulo: string
   fecha: string
   descripcion: string
   enlacePrincipal: EnlaceExterno
-  reconocimientos?: EnlaceExterno[]
-  embeds?: Embed[]
 }
 
 export const proyectosPublicaciones: Proyecto[] = [
@@ -82,30 +109,6 @@ export const proyectosPublicaciones: Proyecto[] = [
       label: 'Ver proyecto',
       url: 'https://drive.google.com/file/d/138Ht-cbE6ZnZXzL2ArrmUQKuodC7XG1t/view?usp=sharing',
     },
-    reconocimientos: [
-      {
-        label: 'Reconocido públicamente por la UMM (colaboración con Microsoft)',
-        url: 'https://lnkd.in/p/ehyHKwxv',
-      },
-      {
-        label: 'Reconocido públicamente por CANIETI Noreste',
-        url: 'https://lnkd.in/p/ea5sMYBe',
-      },
-    ],
-    embeds: [
-      {
-        title: 'Publicación de LinkedIn — reconocimiento de la UMM',
-        src: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7310043022786744320?collapsed=1',
-        height: 627,
-        width: 504,
-      },
-      {
-        title: 'Publicación de LinkedIn — reconocimiento de CANIETI Noreste',
-        src: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7321006183450894336?collapsed=1',
-        height: 627,
-        width: 504,
-      },
-    ],
   },
   {
     titulo: 'Mis Skills de Claude',
@@ -218,6 +221,7 @@ export const navLinks = [
   { href: '#perfil', label: 'Perfil' },
   { href: '#formacion', label: 'Formación' },
   { href: '#certificaciones', label: 'Licencias y Certificaciones' },
+  { href: '#reconocimiento-institucional', label: 'Reconocimiento Institucional' },
   { href: '#proyectos', label: 'Proyectos y Publicaciones' },
   { href: '#experiencia', label: 'Experiencia' },
   { href: '#habilidades', label: 'Habilidades' },
