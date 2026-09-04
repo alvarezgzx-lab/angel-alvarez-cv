@@ -10,7 +10,7 @@ export const persona = {
 }
 
 export const resumenProfesional =
-  'Profesional de la educación, entusiasta de la tecnología y apasionado por el desarrollo de las personas, con formación en ciencias sociales y del comportamiento. Aporta una mentalidad y ética de trabajo basada en la analítica de datos para el diseño de soluciones de aprendizaje que contribuyan a fortalecer las capacidades del talento, a través de la colaboración con diversas áreas estratégicas que impulsen la inteligencia de negocios.'
+  'Profesional de la educación, entusiasta de la tecnología y apasionado por el desarrollo de las personas, con formación en ciencias sociales y del comportamiento. Aporta una mentalidad y ética de trabajo basada en la analítica de datos para el diseño de soluciones de aprendizaje como de gestión de la fuerza laboral que contribuyan a fortalecer las capacidades del talento y el desarrollo organizacional, a través de la colaboración con diversas áreas estratégicas que impulsen la inteligencia de negocios.'
 
 export interface Formacion {
   titulo: string
