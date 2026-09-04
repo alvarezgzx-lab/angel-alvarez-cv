@@ -1,7 +1,27 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { persona } from '../data/content'
 
 export default function Contacto() {
+  const [copied, setCopied] = useState(false)
+
+  useEffect(() => {
+    if (!copied) return
+    const timeout = setTimeout(() => setCopied(false), 2500)
+    return () => clearTimeout(timeout)
+  }, [copied])
+
+  const handleEmailClick = () => {
+    // mailto: only opens something if the browser/OS has a default mail
+    // client registered — very common not to (e.g. Gmail used only via
+    // browser). Copy the address too so the button is useful either way,
+    // without printing it as page text (kept out per the earlier request
+    // to not expose it as plain, scrapeable text).
+    navigator.clipboard?.writeText(persona.email).then(
+      () => setCopied(true),
+      () => {},
+    )
+  }
+
   useEffect(() => {
     // Loaded on mount (not as a static <script> in index.html) so LinkedIn's
     // badge script scans the DOM *after* React has rendered the badge div —
@@ -26,12 +46,23 @@ export default function Contacto() {
         </p>
 
         <div className="mt-10 flex flex-col items-center gap-8">
-          <a
-            href={`mailto:${persona.email}`}
-            className="rounded-md bg-rust-ink px-8 py-3 text-center font-body font-semibold text-cream shadow-sm transition-colors duration-200 hover:bg-rust-ink/90"
-          >
-            Email
-          </a>
+          <div className="flex flex-col items-center gap-2">
+            <a
+              href={`mailto:${persona.email}`}
+              onClick={handleEmailClick}
+              className="rounded-md bg-rust-ink px-8 py-3 text-center font-body font-semibold text-cream shadow-sm transition-colors duration-200 hover:bg-rust-ink/90"
+            >
+              Email
+            </a>
+            <p
+              role="status"
+              aria-live="polite"
+              className="font-mono text-xs text-sage-light transition-opacity duration-300"
+              style={{ opacity: copied ? 1 : 0 }}
+            >
+              {copied ? 'Correo copiado — puedes pegarlo donde prefieras escribirme' : ''}
+            </p>
+          </div>
 
           <div
             className="badge-base LI-profile-badge"
