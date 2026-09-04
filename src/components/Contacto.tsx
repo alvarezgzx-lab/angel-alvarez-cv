@@ -37,7 +37,7 @@ export default function Contacto() {
   }, [])
 
   return (
-    <section id="contacto" className="bg-navy px-5 py-16 text-cream sm:px-8 sm:py-24">
+    <section id="contacto" className="bg-navy px-5 py-12 text-cream sm:px-8 sm:py-16">
       <div className="mx-auto max-w-4xl text-center">
         <h2 className="font-display text-3xl font-semibold sm:text-4xl">Contacto</h2>
         <p className="mx-auto mt-4 max-w-xl font-body text-cream/80">

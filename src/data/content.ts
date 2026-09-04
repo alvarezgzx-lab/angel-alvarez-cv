@@ -9,11 +9,8 @@ export const persona = {
   cvPdf: '/Angel-Alvarez-CV.pdf',
 }
 
-export const perfil =
-  'Licenciado en Educación y Administración, con formación orientada a Gestión del Talento y Aprendizaje Corporativo. Experiencia liderando grupos numerosos, diseñando indicadores de desempeño y facilitando procesos de capacitación y desarrollo de habilidades. Su proyecto de titulación, reconocido por la Cámara Nacional de la Industria Electrónica, de Telecomunicaciones y Tecnologías de la Información (CANIETI) Noreste, lo formó en gestión de múltiples stakeholders al colaborar con expertos en arquitectura de soluciones de IT y ciberseguridad de Microsoft y con la división de transformación digital de la UMM. Estudios en Economía (UANL, hasta 6.° semestre) sentaron bases de pensamiento analítico, modelos predictivos y pensamiento estratégico.'
-
-export const objetivo =
-  'Consolidar una trayectoria en People Analytics, Capacitación y Desarrollo, y Business Intelligence, aplicando conocimientos en gestión de talento humano, diseño instruccional y análisis de datos — con compromiso genuino hacia las personas y fluidez tecnológica — para aportar valor estratégico a un equipo de Recursos Humanos.'
+export const resumenProfesional =
+  'Profesional de la educación, entusiasta de la tecnología y apasionado por el desarrollo de las personas, con formación en ciencias sociales y del comportamiento. Aporta una mentalidad y ética de trabajo basada en la analítica de datos para el diseño de soluciones de aprendizaje que contribuyan a fortalecer las capacidades del talento, a través de la colaboración con diversas áreas estratégicas que impulsen la inteligencia de negocios.'
 
 export interface Formacion {
   titulo: string

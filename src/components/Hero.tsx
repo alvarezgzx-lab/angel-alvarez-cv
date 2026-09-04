@@ -2,7 +2,7 @@ import { persona } from '../data/content'
 
 export default function Hero() {
   return (
-    <section id="inicio" className="px-5 py-24 sm:px-8 sm:py-32">
+    <section id="inicio" className="px-5 py-16 sm:px-8 sm:py-20">
       <div className="mx-auto max-w-2xl text-center">
         <p className="font-mono text-sm uppercase tracking-widest text-sage-light">
           {persona.location}
