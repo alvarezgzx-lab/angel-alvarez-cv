@@ -55,19 +55,28 @@ export const licenciasCertificaciones: Embed[] = [
   },
 ]
 
+export type ReconocimientoColor = 'rust' | 'sage' | 'cream'
+export type ReconocimientoIcono = 'graduacion' | 'chip' | 'certificado'
+
 export interface Reconocimiento {
+  titulo: string
   label: string
   url: string
   linkText: string
+  color: ReconocimientoColor
+  icono: ReconocimientoIcono
   embed?: Embed
-  descripcion?: string
 }
 
 export const reconocimientoInstitucional: Reconocimiento[] = [
   {
-    label: 'Reconocido públicamente por la UMM (colaboración con Microsoft)',
+    titulo: 'UMM · Microsoft Monterrey',
+    label:
+      'Reconocimiento público otorgado por la UMM en colaboración con Microsoft Monterrey, destacando mi participación en un proyecto de innovación educativa y STEM (2025).',
     url: 'https://lnkd.in/p/ehyHKwxv',
     linkText: 'Ver en LinkedIn',
+    color: 'rust',
+    icono: 'graduacion',
     embed: {
       title: 'Publicación de LinkedIn — reconocimiento de la UMM',
       src: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7310043022786744320?collapsed=1',
@@ -76,9 +85,13 @@ export const reconocimientoInstitucional: Reconocimiento[] = [
     },
   },
   {
-    label: 'Reconocido públicamente por CANIETI Noreste',
+    titulo: 'CANIETI Noreste',
+    label:
+      'Reconocimiento público otorgado por la Cámara Nacional de la Industria Electrónica, de Telecomunicaciones y Tecnologías de la Información, destacando mi participación en iniciativas de innovación tecnológica y educación digital.',
     url: 'https://lnkd.in/p/ea5sMYBe',
     linkText: 'Ver en LinkedIn',
+    color: 'sage',
+    icono: 'chip',
     embed: {
       title: 'Publicación de LinkedIn — reconocimiento de CANIETI Noreste',
       src: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7321006183450894336?collapsed=1',
@@ -87,11 +100,13 @@ export const reconocimientoInstitucional: Reconocimiento[] = [
     },
   },
   {
-    label: 'Instructor — Taller Educación 4.0: IA Generativa para el aula del siglo XXI',
+    titulo: 'Instructor — Taller IA',
+    label:
+      'Reconocimiento de la Facultad de Filosofía y Letras (UANL) por mi participación como instructor, en el marco de la Semana Académica del 75.º aniversario de la Facultad (31 de marzo de 2025).',
     url: '/Constancia-Taller-IA.pdf',
     linkText: 'Ver constancia (PDF)',
-    descripcion:
-      'Reconocimiento de la Facultad de Filosofía y Letras (UANL) por mi participación como instructor, en el marco de la Semana Académica del 75.º aniversario de la Facultad (31 de marzo de 2025).',
+    color: 'cream',
+    icono: 'certificado',
   },
 ]
 
