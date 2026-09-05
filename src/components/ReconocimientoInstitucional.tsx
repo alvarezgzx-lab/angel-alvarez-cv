@@ -12,29 +12,41 @@ export default function ReconocimientoInstitucional() {
 
         <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2">
           {reconocimientoInstitucional.map((item, i) => (
-            <div key={item.url} className="flex flex-col items-center gap-3">
+            <div
+              key={item.url}
+              className={`flex flex-col items-center gap-3 ${item.embed ? '' : 'sm:col-span-2'}`}
+            >
               <p className="flex min-h-[2rem] items-center text-center font-mono text-xs uppercase tracking-wide text-sage-light">
                 {item.label}
               </p>
-              <RevealCard
-                index={i}
-                className="w-full rounded-md border border-navy/10 bg-cream shadow-bevel"
-              >
-                <iframe
-                  src={item.embed.src}
-                  title={item.embed.title}
-                  width="100%"
-                  height={item.embed.height}
-                  loading="lazy"
-                  allowFullScreen
-                  className="block w-full border-0"
-                />
-              </RevealCard>
+              {item.embed ? (
+                <RevealCard
+                  index={i}
+                  className="w-full rounded-md border border-navy/10 bg-cream shadow-bevel"
+                >
+                  <iframe
+                    src={item.embed.src}
+                    title={item.embed.title}
+                    width="100%"
+                    height={item.embed.height}
+                    loading="lazy"
+                    allowFullScreen
+                    className="block w-full border-0"
+                  />
+                </RevealCard>
+              ) : (
+                <RevealCard
+                  index={i}
+                  className="w-full max-w-md rounded-md border border-navy/10 bg-cream p-6 text-center shadow-bevel"
+                >
+                  <p className="font-body text-sm text-navy/80">{item.descripcion}</p>
+                </RevealCard>
+              )}
               <ExternalLink
                 href={item.url}
                 className="font-mono text-xs text-rust-light underline-offset-4 transition-colors duration-200 hover:underline"
               >
-                Ver en LinkedIn
+                {item.linkText}
                 <span aria-hidden="true" className="ml-1">
                   ↗
                 </span>

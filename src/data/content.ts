@@ -58,13 +58,16 @@ export const licenciasCertificaciones: Embed[] = [
 export interface Reconocimiento {
   label: string
   url: string
-  embed: Embed
+  linkText: string
+  embed?: Embed
+  descripcion?: string
 }
 
 export const reconocimientoInstitucional: Reconocimiento[] = [
   {
     label: 'Reconocido públicamente por la UMM (colaboración con Microsoft)',
     url: 'https://lnkd.in/p/ehyHKwxv',
+    linkText: 'Ver en LinkedIn',
     embed: {
       title: 'Publicación de LinkedIn — reconocimiento de la UMM',
       src: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7310043022786744320?collapsed=1',
@@ -75,12 +78,20 @@ export const reconocimientoInstitucional: Reconocimiento[] = [
   {
     label: 'Reconocido públicamente por CANIETI Noreste',
     url: 'https://lnkd.in/p/ea5sMYBe',
+    linkText: 'Ver en LinkedIn',
     embed: {
       title: 'Publicación de LinkedIn — reconocimiento de CANIETI Noreste',
       src: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7321006183450894336?collapsed=1',
       height: 627,
       width: 504,
     },
+  },
+  {
+    label: 'Instructor — Taller Educación 4.0: IA Generativa para el aula del siglo XXI',
+    url: '/Constancia-Taller-IA.pdf',
+    linkText: 'Ver constancia (PDF)',
+    descripcion:
+      'Reconocimiento de la Facultad de Filosofía y Letras (UANL) por mi participación como instructor, en el marco de la Semana Académica del 75.º aniversario de la Facultad (31 de marzo de 2025).',
   },
 ]
 
