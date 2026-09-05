@@ -53,6 +53,9 @@ export default function ReconocimientoInstitucional() {
         <h2 className="text-center font-display text-3xl font-semibold text-cream sm:text-left sm:text-4xl">
           Reconocimiento Institucional
         </h2>
+        <p className="mt-2 text-center font-mono text-xs uppercase tracking-widest text-sage-light sm:text-left">
+          Haz clic en cada insignia para ver el reconocimiento completo
+        </p>
 
         <div className="mt-10 flex flex-wrap justify-center gap-x-10 gap-y-10 sm:gap-x-14">
           {reconocimientoInstitucional.map((item) => (
@@ -62,9 +65,18 @@ export default function ReconocimientoInstitucional() {
                 onClick={(e) => handleOpen(item, e)}
                 aria-haspopup="dialog"
                 aria-label={`Ver reconocimiento: ${item.titulo}`}
-                className={`flex h-20 w-20 items-center justify-center rounded-full shadow-bevel transition-transform duration-200 hover:scale-105 focus-visible:scale-105 sm:h-24 sm:w-24 ${BADGE_STYLES[item.color]}`}
+                className={`relative flex h-20 w-20 items-center justify-center rounded-full shadow-bevel transition-transform duration-200 hover:scale-105 focus-visible:scale-105 sm:h-24 sm:w-24 ${BADGE_STYLES[item.color]}`}
               >
                 <span className="h-8 w-8 sm:h-9 sm:w-9">{ICONS[item.icono]}</span>
+                <span
+                  aria-hidden="true"
+                  className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-rust-ink text-cream shadow-sm ring-2 ring-navy"
+                >
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="11" cy="11" r="7" />
+                    <path d="M21 21l-4.3-4.3" />
+                  </svg>
+                </span>
               </button>
               <p className="font-body text-xs leading-snug text-cream/80 sm:text-sm">{item.label}</p>
             </div>
