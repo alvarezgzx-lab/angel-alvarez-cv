@@ -34,7 +34,7 @@ INK = HexColor("#1F1F1F")
 MUTED = HexColor("#5A5A5A")
 
 SITE_URL = "https://angel-alvarez-cv.vercel.app"
-LINKEDIN_URL = "https://linkedin.com/in/angelalvarezg97"
+LINKEDIN_URL = "https://www.linkedin.com/in/jesusalvarezgz"
 OUT_DIR = Path(__file__).resolve().parent.parent / "public"
 
 styles = {
@@ -155,6 +155,10 @@ def build(lang: str, data: dict, filename: str):
     story.append(Paragraph(data["resumenProfesional"], styles["body"]))
     story.append(Spacer(1, 2 * mm))
 
+    story += section_heading(data["headings"]["objetivo"])
+    story.append(Paragraph(data["objetivo"], styles["body"]))
+    story.append(Spacer(1, 2 * mm))
+
     story += section_heading(data["headings"]["formacion"])
     for f in data["formacion"]:
         left = [
@@ -163,7 +167,13 @@ def build(lang: str, data: dict, filename: str):
         ]
         story.append(two_col_row(left, f["fecha"]))
         if f.get("nota"):
-            story.append(Paragraph(f["nota"], styles["body"]))
+            nota_text = f["nota"]
+            if f.get("enlace"):
+                nota_text += (
+                    f' <link href="{f["enlace"]["url"]}" color="#A45232">'
+                    f'<b>{f["enlace"]["label"]}</b></link>'
+                )
+            story.append(Paragraph(nota_text, styles["body"]))
         story.append(Spacer(1, 2 * mm))
 
     story += section_heading(data["headings"]["certificaciones"])
@@ -177,7 +187,13 @@ def build(lang: str, data: dict, filename: str):
     for p in data["proyectos"]:
         left = [Paragraph(f'{p["titulo"]} <font color="#546C56">— {p["tipo"]}</font>', styles["itemTitle"])]
         story.append(two_col_row(left, p["fecha"]))
-        story.append(Paragraph(p["descripcion"], styles["body"]))
+        descripcion_text = p["descripcion"]
+        if p.get("enlace"):
+            descripcion_text += (
+                f' <link href="{p["enlace"]["url"]}" color="#A45232">'
+                f'<b>{p["enlace"]["label"]}</b></link>'
+            )
+        story.append(Paragraph(descripcion_text, styles["body"]))
         story.append(Spacer(1, 2 * mm))
 
     story += section_heading(data["headings"]["experiencia"])
@@ -221,20 +237,30 @@ ES = {
     "cvLabel": "angel-alvarez-cv.vercel.app",
     "headings": {
         "perfil": "Perfil profesional",
+        "objetivo": "Objetivo profesional",
         "formacion": "Formación académica",
         "certificaciones": "Certificaciones",
-        "proyectos": "Proyectos independientes y publicaciones",
+        "proyectos": "Proyectos independientes",
         "experiencia": "Experiencia profesional",
         "habilidades": "Habilidades y conocimientos",
         "idiomas": "Idiomas",
     },
     "resumenProfesional": (
-        "Licenciado en Educación y Administración de Centros Educativos, reconocido por "
-        "instituciones como la UMM y CANIETI por mi colaboración interdisciplinaria con equipos "
-        "de transformación digital —incluyendo Microsoft— aportando visión estratégica para "
-        "automatizar procesos de gestión en educación superior. También reconocido por la "
-        "Facultad de Filosofía y Letras de la UANL como instructor en IA aplicada al aula, "
-        "formando profesionales resilientes para la transformación digital y la Sociedad 5.0."
+        "Licenciado en Educación y Administración, con formación orientada a Gestión del "
+        "Talento y Aprendizaje Corporativo. Experiencia liderando grupos numerosos, diseñando "
+        "indicadores de desempeño y facilitando procesos de capacitación y desarrollo de "
+        "habilidades. Su proyecto de titulación, reconocido por la Cámara Nacional de la "
+        "Industria Electrónica, de Telecomunicaciones y Tecnologías de la Información (CANIETI) "
+        "Noreste, lo formó en gestión de múltiples stakeholders al colaborar con expertos en "
+        "arquitectura de soluciones de IT y ciberseguridad de Microsoft y con la división de "
+        "transformación digital de la UMM. Estudios en Economía (UANL, hasta 6.° semestre) "
+        "sentaron bases de pensamiento analítico, modelos predictivos y pensamiento estratégico."
+    ),
+    "objetivo": (
+        "Consolidar una trayectoria en People Analytics, Capacitación y Desarrollo, y Business "
+        "Intelligence, aplicando conocimientos en gestión de talento humano, diseño "
+        "instruccional y análisis de datos — con compromiso genuino hacia las personas y "
+        "fluidez tecnológica — para aportar valor estratégico a un equipo de Recursos Humanos."
     ),
     "formacion": [
         {
@@ -247,6 +273,10 @@ ES = {
                 "de valoración docente, en colaboración con Microsoft y reconocido por CANIETI "
                 "Noreste."
             ),
+            "enlace": {
+                "label": "Ver proyecto",
+                "url": "https://drive.google.com/file/d/138Ht-cbE6ZnZXzL2ArrmUQKuodC7XG1t/view?usp=sharing",
+            },
         },
         {
             "titulo": "Licenciatura en Economía (no concluida)",
@@ -268,23 +298,20 @@ ES = {
     ],
     "proyectos": [
         {
-            "titulo": "D.A.T.A. — Development of AI Teaching & Automation",
-            "tipo": "Proyecto",
-            "fecha": "Abril 2025",
-            "descripcion": (
-                "Ecosistema multiagente de IA conversacional para planificación, evaluación y "
-                "personalización del aprendizaje; piloto institucional con 86–98% de valoración "
-                "docente."
-            ),
-        },
-        {
             "titulo": "Casa CoLectiva — Economía del Desarrollo Educativo y del Talento",
             "tipo": "Proyecto propio · sitio en construcción",
             "fecha": "",
             "descripcion": (
                 "Línea de investigación y divulgación digital independiente enfocada en factores "
-                "macroeconómicos y de mercado laboral en el desarrollo estratégico de talento."
+                "macroeconómicos y de mercado laboral en el desarrollo estratégico de talento. "
+                'Primera publicación: "Innovación social y educativa para la prosperidad '
+                'compartida: el crecimiento del mercado EdTech" (innovación social, Cuádruple '
+                "Hélice, EdTech)."
             ),
+            "enlace": {
+                "label": "Ver publicación",
+                "url": "https://drive.google.com/file/d/18sfS9noC6Jzw4UtMlHFNYUhjHRpyqrZu/view?usp=sharing",
+            },
         },
         {
             "titulo": "Protocolo CoLectivo — repositorio de skills con IA",
@@ -292,21 +319,14 @@ ES = {
             "fecha": "",
             "descripcion": (
                 "Skills y flujos de trabajo con IA (Claude) que codifican metodologías propias en "
-                "economía de la educación, gestión del talento y diseño instruccional."
+                "economía de la educación, gestión del talento y diseño instruccional; cada "
+                "skill automatiza un flujo específico combinando marcos teóricos con estándares "
+                "técnicos del sector."
             ),
-        },
-        {
-            "titulo": (
-                "Innovación Social y Educativa para la Prosperidad Compartida: El Crecimiento "
-                "del Mercado EdTech"
-            ),
-            "tipo": "Publicación independiente",
-            "fecha": "E-Socialis, UMM",
-            "descripcion": (
-                "Primera publicación de Casa CoLectiva: revisión de 26 fuentes académicas sobre "
-                "la tensión entre lógica de mercado y equidad social en el crecimiento del sector "
-                "EdTech; propone un marco de cuatro pilares."
-            ),
+            "enlace": {
+                "label": "Ver repositorio",
+                "url": "https://github.com/alvarezgzx-lab/protocolo-colectivo",
+            },
         },
     ],
     "experiencia": [
@@ -384,7 +404,7 @@ ES = {
         "Herramientas y Transferibles": [
             "Word",
             "PowerPoint",
-            "Herramientas de autor (Easy Generator, Articulate, Genially)",
+            "Autor (Easy Generator, Articulate, Genially)",
             "HTML/React",
             "Llamadas a API en JSX de React",
             "Vibe coding",
@@ -407,20 +427,30 @@ EN = {
     "cvLabel": "angel-alvarez-cv.vercel.app",
     "headings": {
         "perfil": "Professional profile",
+        "objetivo": "Professional objective",
         "formacion": "Education",
         "certificaciones": "Certifications",
-        "proyectos": "Independent projects & publications",
+        "proyectos": "Independent projects",
         "experiencia": "Professional experience",
         "habilidades": "Skills & knowledge",
         "idiomas": "Languages",
     },
     "resumenProfesional": (
-        "I hold a degree in Education and Administration, recognized by institutions like UMM "
-        "and CANIETI for interdisciplinary collaboration with digital-transformation teams — "
-        "including Microsoft — bringing strategic vision to automating higher-education "
-        "management processes. Also recognized by UANL's Facultad de Filosofía y Letras as an "
-        "AI-in-the-classroom instructor, shaping resilient professionals for digital "
-        "transformation and Society 5.0."
+        "Bachelor's degree in Education and Administration, with training focused on Talent "
+        "Management and Corporate Learning. Experience leading large groups, designing "
+        "performance indicators, and facilitating training and skills-development processes. "
+        "His capstone project, recognized by the Northeast chapter of the National Chamber of "
+        "the Electronics, Telecommunications, and Information Technology Industry (CANIETI), "
+        "gave him experience managing multiple stakeholders while collaborating with Microsoft "
+        "IT solutions architecture and cybersecurity experts and with UMM's digital "
+        "transformation division. Studies in Economics (UANL, through the 6th semester) built a "
+        "foundation in analytical thinking, predictive models, and strategic thinking."
+    ),
+    "objetivo": (
+        "Build a career in People Analytics, Learning & Development, and Business Intelligence, "
+        "applying expertise in human talent management, instructional design, and data analysis "
+        "— with genuine commitment to people and technological fluency — to bring strategic "
+        "value to a Human Resources team."
     ),
     "formacion": [
         {
@@ -433,6 +463,10 @@ EN = {
                 "86–98% by faculty, developed in collaboration with Microsoft and recognized by "
                 "CANIETI Noreste."
             ),
+            "enlace": {
+                "label": "View project",
+                "url": "https://drive.google.com/file/d/138Ht-cbE6ZnZXzL2ArrmUQKuodC7XG1t/view?usp=sharing",
+            },
         },
         {
             "titulo": "Bachelor's Degree in Economics (not completed)",
@@ -454,22 +488,19 @@ EN = {
     ],
     "proyectos": [
         {
-            "titulo": "D.A.T.A. — Development of AI Teaching & Automation",
-            "tipo": "Project",
-            "fecha": "April 2025",
-            "descripcion": (
-                "A conversational multi-agent AI ecosystem for learning planning, assessment, "
-                "and personalization; institutional pilot rated 86–98% by faculty."
-            ),
-        },
-        {
             "titulo": "Casa CoLectiva — Economics of Educational and Talent Development",
             "tipo": "Own project · site under construction",
             "fecha": "",
             "descripcion": (
                 "Independent research and digital dissemination line focused on macroeconomic "
-                "and labor-market factors in strategic talent development."
+                "and labor-market factors in strategic talent development. First publication: "
+                '"Social and Educational Innovation for Shared Prosperity: The Growth of the '
+                'EdTech Market" (social innovation, Quadruple Helix, EdTech).'
             ),
+            "enlace": {
+                "label": "View publication",
+                "url": "https://drive.google.com/file/d/18sfS9noC6Jzw4UtMlHFNYUhjHRpyqrZu/view?usp=sharing",
+            },
         },
         {
             "titulo": "Protocolo CoLectivo — AI skills repository",
@@ -477,21 +508,14 @@ EN = {
             "fecha": "",
             "descripcion": (
                 "AI (Claude) skills and workflows that encode original methodologies in the "
-                "economics of education, talent management, and instructional design."
+                "economics of education, talent management, and instructional design; each "
+                "skill automates a specific workflow combining recognized theoretical "
+                "frameworks with industry technical standards."
             ),
-        },
-        {
-            "titulo": (
-                "Social and Educational Innovation for Shared Prosperity: The Growth of the "
-                "EdTech Market"
-            ),
-            "tipo": "Independent publication",
-            "fecha": "E-Socialis, UMM",
-            "descripcion": (
-                "Casa CoLectiva's first publication: a review of 26 academic sources on the "
-                "tension between market logic and social equity in the growth of the EdTech "
-                "sector; proposes a four-pillar framework."
-            ),
+            "enlace": {
+                "label": "View repository",
+                "url": "https://github.com/alvarezgzx-lab/protocolo-colectivo",
+            },
         },
     ],
     "experiencia": [

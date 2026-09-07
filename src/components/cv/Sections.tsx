@@ -7,7 +7,7 @@ import { useLanguage } from "@/lib/language";
 
 function Shell({ children, id }: { children: React.ReactNode; id: string }) {
   return (
-    <section id={id} className="border-t border-cream/12 px-5 py-14 sm:px-8 sm:py-20">
+    <section id={id} className="border-t border-cream/12 px-5 py-8 sm:px-8 sm:py-12">
       <div className="mx-auto max-w-5xl">{children}</div>
     </section>
   );
@@ -15,13 +15,13 @@ function Shell({ children, id }: { children: React.ReactNode; id: string }) {
 
 function Masthead({ num, children }: { num: string; children: React.ReactNode }) {
   return (
-    <div className="mb-10 grid gap-3 sm:grid-cols-[7.5rem_1fr] sm:items-baseline sm:gap-6">
+    <div className="mb-6 grid gap-2 sm:grid-cols-[7.5rem_1fr] sm:items-baseline sm:gap-6">
       <span className="font-mono text-xs tracking-[0.3em] text-rust-light">{num}</span>
       <div>
-        <h2 className="font-display text-3xl font-normal italic leading-none text-cream sm:text-[2.75rem]">
+        <h2 className="font-display text-2xl font-normal italic leading-none text-cream sm:text-3xl">
           {children}
         </h2>
-        <span aria-hidden="true" className="mt-4 block h-px w-full bg-cream/20" />
+        <span aria-hidden="true" className="mt-3 block h-px w-full bg-cream/20" />
       </div>
     </div>
   );
@@ -44,7 +44,7 @@ function Aside({ children }: { children: React.ReactNode }) {
 export function Hero() {
   const { copy } = useLanguage();
   return (
-    <section id="inicio" className="px-5 pb-14 pt-10 sm:px-8 sm:pb-20 sm:pt-14">
+    <section id="inicio" className="px-5 pb-8 pt-6 sm:px-8 sm:pb-10 sm:pt-8">
       <div className="mx-auto max-w-5xl">
         <div className="flex flex-wrap items-center justify-between gap-3 border-y border-cream/20 py-2 font-mono text-[0.65rem] uppercase tracking-[0.28em] text-cream/55">
           <span>{copy.location}</span>
@@ -54,17 +54,17 @@ export function Hero() {
           <span>{new Date().getFullYear()}</span>
         </div>
 
-        <div className="mt-10 grid items-end gap-10 md:grid-cols-[1.35fr_1fr]">
+        <div className="mt-6 grid items-end gap-8 md:grid-cols-[1.35fr_1fr]">
           <div>
-            <h1 className="font-display text-[3.25rem] font-normal italic leading-[0.92] tracking-tight text-cream sm:text-[5rem] md:text-[6rem]">
+            <h1 className="font-display text-4xl font-normal italic leading-[0.95] tracking-tight text-cream sm:text-6xl md:text-7xl">
               {persona.name}
             </h1>
-            <span aria-hidden="true" className="mt-6 block h-px w-24 bg-rust-ui" />
-            <p className="mt-6 max-w-md font-body text-base leading-relaxed text-cream/75 sm:text-lg">
+            <span aria-hidden="true" className="mt-4 block h-px w-24 bg-rust-ui" />
+            <p className="mt-4 max-w-md font-body text-sm leading-relaxed text-cream/75 sm:text-base">
               {copy.headline}
             </p>
 
-            <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
               <a
                 href={copy.cvPdfUrl}
                 target="_blank"
@@ -110,10 +110,16 @@ export function Perfil() {
       <Grid>
         <Aside>{copy.navLinks.find((l) => l.href === "#perfil")?.label ?? ""}</Aside>
         <div className="mt-4 sm:mt-0">
-          <p className="font-display text-xl font-normal italic leading-relaxed text-cream/90 first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:font-display first-letter:text-6xl first-letter:not-italic first-letter:leading-[0.8] first-letter:text-rust-light sm:text-2xl">
+          <p className="font-display text-base font-normal italic leading-relaxed text-cream/90 first-letter:float-left first-letter:mr-2 first-letter:font-display first-letter:text-4xl first-letter:not-italic first-letter:leading-[0.8] first-letter:text-rust-light sm:text-lg">
             {copy.resumenProfesional}
           </p>
-          <p className="mt-6 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-cream/45">
+          <p className="mt-4 font-mono text-[0.65rem] uppercase tracking-[0.2em] text-sage-light">
+            {copy.objetivoLabel}
+          </p>
+          <p className="mt-2 font-display text-base font-normal italic leading-relaxed text-cream/90 sm:text-lg">
+            {copy.objetivo}
+          </p>
+          <p className="mt-5 font-mono text-[0.65rem] uppercase tracking-[0.2em] text-cream/45">
             {persona.fullName}
           </p>
         </div>
@@ -134,13 +140,26 @@ export function Formacion() {
           <li key={item.titulo} className="py-7 first:pt-0 sm:grid sm:grid-cols-[7.5rem_1fr] sm:gap-6">
             <Aside>{item.fecha}</Aside>
             <div className="mt-2 sm:mt-0">
-              <h3 className="font-display text-xl font-normal italic text-cream sm:text-2xl">
+              <h3 className="font-display text-lg font-normal italic text-cream sm:text-xl">
                 {item.titulo}
               </h3>
               <p className="mt-1 font-body text-sm text-cream/60">{item.institucion}</p>
               {item.nota ? (
-                <p className="mt-4 max-w-2xl border-l-2 border-rust-ui/70 pl-4 font-body text-sm leading-relaxed text-cream/75">
+                <p className="mt-3 max-w-2xl border-l-2 border-rust-ui/70 pl-4 font-body text-sm leading-relaxed text-cream/75">
                   {item.nota}
+                  {item.enlace ? (
+                    <>
+                      {" "}
+                      <a
+                        href={item.enlace.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-mono text-xs uppercase tracking-[0.14em] text-rust-light underline-offset-4 hover:underline"
+                      >
+                        {item.enlace.label}
+                      </a>
+                    </>
+                  ) : null}
                 </p>
               ) : null}
             </div>
@@ -377,7 +396,7 @@ export function Proyectos() {
               <span className="inline-block rounded-full border border-rust-light/40 px-2.5 py-0.5 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-rust-light">
                 {p.tipo}
               </span>
-              <h3 className="mt-2 font-display text-xl font-normal italic text-cream sm:text-2xl">
+              <h3 className="mt-2 font-display text-lg font-normal italic text-cream sm:text-xl">
                 {p.titulo}
               </h3>
               <p className="mt-3 max-w-2xl font-body text-sm leading-relaxed text-cream/75">
@@ -414,7 +433,7 @@ export function Experiencia() {
           <li key={e.puesto} className="py-8 first:pt-0 sm:grid sm:grid-cols-[7.5rem_1fr] sm:gap-6">
             <Aside>{e.fecha}</Aside>
             <div className="mt-2 sm:mt-0">
-              <h3 className="font-display text-xl font-normal italic text-cream sm:text-2xl">
+              <h3 className="font-display text-lg font-normal italic text-cream sm:text-xl">
                 {e.puesto}
               </h3>
               <p className="mt-1 font-body text-sm text-cream/60">{e.organizacion}</p>
@@ -504,15 +523,15 @@ export function Contacto() {
   }, []);
 
   return (
-    <section id="contacto" className="border-t border-cream/12 px-5 py-16 sm:px-8 sm:py-24">
+    <section id="contacto" className="border-t border-cream/12 px-5 py-10 sm:px-8 sm:py-14">
       <div className="mx-auto max-w-5xl">
         <p className="font-mono text-xs uppercase tracking-[0.3em] text-rust-light">07</p>
-        <h2 className="mt-4 max-w-3xl font-display text-3xl font-normal italic leading-tight text-cream sm:text-[3.25rem]">
+        <h2 className="mt-4 max-w-3xl font-display text-2xl font-normal italic leading-tight text-cream sm:text-4xl">
           {copy.contactoPrompt}
         </h2>
-        <span aria-hidden="true" className="mt-8 block h-px w-full bg-cream/20" />
+        <span aria-hidden="true" className="mt-6 block h-px w-full bg-cream/20" />
 
-        <div className="mt-10 flex flex-col items-start gap-8 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-8 flex flex-col items-start gap-8 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-col items-start gap-2">
             <a
               href={`mailto:${persona.email}`}
@@ -544,7 +563,7 @@ export function Contacto() {
             data-size="medium"
             data-theme="light"
             data-type="HORIZONTAL"
-            data-vanity="angelalvarezg97"
+            data-vanity="jesusalvarezgz"
             data-version="v1"
           >
             <a

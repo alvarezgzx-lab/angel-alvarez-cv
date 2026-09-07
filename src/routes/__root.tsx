@@ -30,7 +30,7 @@ const personJsonLd = {
     "Especialista en Aprendizaje y People Analytics | Habilitación de Fuerza Laboral y Estrategia de Negocio | Investigador Independiente en Economía de la Educación y el Talento",
   url: SITE_URL,
   email: "mailto:alvarezgzx@gmail.com",
-  sameAs: ["https://linkedin.com/in/angelalvarezg97"],
+  sameAs: ["https://www.linkedin.com/in/jesusalvarezgz"],
   alumniOf: {
     "@type": "CollegeOrUniversity",
     name: "Universidad Metropolitana de Monterrey (UMM)",
