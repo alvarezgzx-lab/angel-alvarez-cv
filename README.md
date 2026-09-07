@@ -1,4 +1,4 @@
-# Ángel Álvarez — CV Digital (ES/EN)
+# Jesús Álvarez — CV Digital (ES/EN)
 
 CV digital interactivo, bilingüe (español/inglés), de una sola página. Construido en
 [Lovable](https://lovable.dev) sobre TanStack Start + React + Tailwind CSS, con
@@ -64,11 +64,17 @@ src/
   components/cv/              # Nav.tsx, Sections.tsx — todas las secciones del CV
   components/ui/                # componentes shadcn/ui (Radix + Tailwind)
 public/
-  Angel-Alvarez-CV.pdf       # CV descargable (botón "Ver CV en PDF" / "View CV (PDF)")
+  CV-Jesus-Alvarez-ES.pdf     # CV descargable en español (botón "Ver CV en PDF")
+  CV-Jesus-Alvarez-EN.pdf     # CV descargable en inglés (botón "View CV (PDF)")
   Constancia-Taller-IA.pdf    # constancia del taller de IA (Reconocimiento Institucional)
   images/angel-photo.webp     # foto de perfil
   og-image.png                 # imagen 1200×630 para redes sociales
   favicon.svg / favicon-32.png / apple-touch-icon.png
+scripts/
+  generate_cv_pdf.py           # regenera los dos PDF de arriba (reportlab) — sin teléfono
+                                 ni correo; el contacto es siempre vía el botón de Contacto
+                                 del sitio. No lee content.ts (es Python) — mantener el
+                                 contenido de ambos en sync manualmente.
 ```
 
 ## Privacidad

@@ -1,14 +1,11 @@
 export type Lang = "es" | "en";
 
 export const persona = {
-  name: "Ángel Álvarez",
+  name: "Jesús Álvarez",
   fullName: "Jesús Ángel Álvarez González",
-  headline:
-    "Learning Analyst (Associate) | Workforce Enablement & Business Strategy | Cross-Functional HR Operations | Data & Metrics",
   email: "alvarezgzx@gmail.com",
   linkedin: "https://linkedin.com/in/angelalvarezg97",
   linkedinBadge: "https://mx.linkedin.com/in/angelalvarezg97?trk=profile-badge",
-  cvPdf: "/Angel-Alvarez-CV.pdf",
   photo: "/images/angel-photo.webp",
 };
 
@@ -26,16 +23,21 @@ export interface Embed {
   width: number;
 }
 
-export type ReconocimientoIcono = "graduacion" | "chip" | "certificado";
-export type ReconocimientoColor = "rust" | "sage" | "cream";
+export type InsigniaIcono = "graduacion" | "chip" | "certificado";
+export type InsigniaColor = "rust" | "sage" | "cream";
 
-export interface Reconocimiento {
+// Shared shape for both Reconocimiento Institucional and Licencias y
+// Certificaciones: a circular icon badge that opens a modal with a
+// description + external link (and an embed when one is embeddable —
+// Coursera share links aren't, LinkedIn posts are).
+export interface Insignia {
   titulo: string;
   label: string;
+  fecha?: string;
   url: string;
   linkText: string;
-  color: ReconocimientoColor;
-  icono: ReconocimientoIcono;
+  color: InsigniaColor;
+  icono: InsigniaIcono;
   embed?: Embed;
 }
 
@@ -44,7 +46,7 @@ export interface Proyecto {
   tipo: string;
   fecha: string;
   descripcion: string;
-  enlacePrincipal: { label: string; url: string };
+  enlacePrincipal?: { label: string; url: string };
 }
 
 export interface Experiencia {
@@ -60,6 +62,7 @@ export interface Copy {
   metaDescription: string;
   skipToContent: string;
   location: string;
+  headline: string;
   resumenProfesional: string;
   navAriaLabel: string;
   openMenu: string;
@@ -68,6 +71,7 @@ export interface Copy {
   languageToggleLabel: string;
   photoAlt: string;
   ctaCv: string;
+  cvPdfUrl: string;
   ctaContact: string;
   navLinks: { href: string; label: string }[];
   headings: {
@@ -81,9 +85,10 @@ export interface Copy {
   };
   reconocimientoHint: string;
   reconocimientoAria: (t: string) => string;
+  proyectosHint: string;
   formacion: Formacion[];
-  licenciasCertificaciones: Embed[];
-  reconocimientoInstitucional: Reconocimiento[];
+  licenciasCertificaciones: Insignia[];
+  reconocimientoInstitucional: Insignia[];
   proyectosPublicaciones: Proyecto[];
   experiencia: Experiencia[];
   habilidades: Record<string, string[]>;
@@ -113,21 +118,23 @@ const canietiEmbed = {
 
 export const es: Copy = {
   htmlLang: "es-MX",
-  title:
-    "Ángel Álvarez | Learning Analyst (Associate) | Workforce Enablement & Business Strategy",
+  title: "Jesús Álvarez | Especialista en Aprendizaje y People Analytics",
   metaDescription:
-    "CV digital de Ángel Álvarez: People Analytics, Capacitación y Desarrollo, Reclutamiento y Desarrollo Organizacional. Proyectos, publicaciones y experiencia verificables.",
+    "CV digital de Jesús Álvarez: People Analytics, Habilitación de Fuerza Laboral y Estrategia de Negocio, investigación independiente en economía de la educación y el talento. Proyectos, publicaciones y experiencia verificables.",
   skipToContent: "Saltar al contenido principal",
   location: "Nuevo León, México",
+  headline:
+    "Especialista en Aprendizaje y People Analytics | Habilitación de Fuerza Laboral y Estrategia de Negocio | Investigador Independiente en Economía de la Educación y el Talento",
   resumenProfesional:
-    "Profesional de la educación, entusiasta de la tecnología y apasionado por el desarrollo de las personas, con formación en ciencias sociales y del comportamiento. Aporta una mentalidad y ética de trabajo basada en la analítica de datos para el diseño de soluciones de aprendizaje como de gestión de la fuerza laboral que contribuyan a fortalecer las capacidades del talento y el desarrollo organizacional, a través de la colaboración con diversas áreas estratégicas con el objetivo de impulsar la inteligencia de negocios para la toma de decisiones.",
+    "Licenciado en Educación y Administración de Centros Educativos, reconocido por instituciones como la UMM y CANIETI por mi colaboración interdisciplinaria con equipos de transformación digital —incluyendo Microsoft— aportando visión estratégica para automatizar procesos de gestión en educación superior. También reconocido por la Facultad de Filosofía y Letras de la UANL como instructor en IA aplicada al aula, formando profesionales resilientes para la transformación digital y la Sociedad 5.0.",
   navAriaLabel: "Navegación principal",
   openMenu: "Abrir menú",
   closeMenu: "Cerrar menú",
   close: "Cerrar",
   languageToggleLabel: "Cambiar idioma a inglés",
-  photoAlt: "Retrato de Ángel Álvarez",
+  photoAlt: "Retrato de Jesús Álvarez",
   ctaCv: "Ver CV en PDF",
+  cvPdfUrl: "/CV-Jesus-Alvarez-ES.pdf",
   ctaContact: "Contactar",
   navLinks: [
     { href: "#inicio", label: "Inicio" },
@@ -151,6 +158,8 @@ export const es: Copy = {
   },
   reconocimientoHint: "Haz clic en cada insignia para ver el reconocimiento completo",
   reconocimientoAria: (t) => `Ver reconocimiento: ${t}`,
+  proyectosHint:
+    "Los documentos de Drive están abiertos a comentarios — compárteme tus ideas u observaciones.",
   formacion: [
     {
       titulo: "Licenciatura en Educación y Administración de Centros Educativos",
@@ -167,11 +176,14 @@ export const es: Copy = {
   ],
   licenciasCertificaciones: [
     {
-      title:
-        "Certificado de finalización — Workforce Planning Strategy (Microsoft, vía Coursera)",
-      src: "https://www.linkedin.com/embed/feed/update/urn:li:share:7501379217348096000?collapsed=1",
-      height: 539,
-      width: 504,
+      titulo: "Workforce Planning Strategy — Microsoft",
+      label:
+        "Coursera · Curso 1 de la especialización Strategic Workforce Planning. Planeación de fuerza laboral con métricas de éxito claras, dashboards en Power BI con KPIs y fórmulas DAX, análisis de señales de engagement y riesgo de rotación, e impacto de la IA en las necesidades de talento.",
+      fecha: "Sep 2026",
+      url: "https://coursera.org/share/1173e7e3ea7497b4d355b6487be5ddbc",
+      linkText: "Ver certificado",
+      color: "rust",
+      icono: "certificado",
     },
   ],
   reconocimientoInstitucional: [
@@ -224,11 +236,18 @@ export const es: Copy = {
       },
     },
     {
-      titulo: "Mis Skills de Claude",
-      tipo: "Proyecto",
-      fecha: "2026 · en desarrollo continuo",
+      titulo: "Casa CoLectiva — Economía del Desarrollo Educativo y del Talento",
+      tipo: "Proyecto propio",
+      fecha: "Sitio en construcción",
       descripcion:
-        "Repositorio personal de skills para Claude orientadas a Recursos Humanos y gestión de talento; incluye una skill para generar Strategic Workforce Planning Briefs mediante un proceso guiado de 7 fases.",
+        "Línea de investigación y divulgación digital independiente enfocada en factores macroeconómicos y de mercado laboral en el desarrollo estratégico de talento.",
+    },
+    {
+      titulo: "Protocolo CoLectivo — repositorio de skills con IA",
+      tipo: "Proyecto",
+      fecha: "En desarrollo continuo",
+      descripcion:
+        "Skills y flujos de trabajo con IA (Claude) que codifican metodologías propias en economía de la educación, gestión del talento y diseño instruccional; cada skill automatiza un flujo específico combinando marcos teóricos con estándares técnicos del sector.",
       enlacePrincipal: {
         label: "Ver repositorio",
         url: "https://github.com/alvarezgzx-lab/mis-skills-de-claude",
@@ -240,7 +259,7 @@ export const es: Copy = {
       tipo: "Publicación independiente",
       fecha: "E-Socialis, UMM · aprobada, vol. 1 (pendiente de publicación)",
       descripcion:
-        "Revisión de 26 fuentes académicas sobre la tensión entre lógica de mercado y equidad social en el crecimiento del sector EdTech; propone un marco de cuatro pilares.",
+        "Primera publicación de Casa CoLectiva: revisión de 26 fuentes académicas sobre la tensión entre lógica de mercado y equidad social en el crecimiento del sector EdTech; propone un marco de cuatro pilares.",
       enlacePrincipal: {
         label: "Ver artículo",
         url: "https://drive.google.com/file/d/18sfS9noC6Jzw4UtMlHFNYUhjHRpyqrZu/view?usp=sharing",
@@ -288,32 +307,35 @@ export const es: Copy = {
     "People Analytics, Talento y Desarrollo Organizacional": [
       "Planeación de fuerza laboral",
       "People analytics",
-      "Reclutamiento y selección",
-      "Onboarding",
       "Desempeño y compensación",
       "Planeación de sucesión",
       "Gestión del cambio y cultura organizacional",
+      "Pensamiento estratégico y de negocios",
     ],
     "Capacitación y Desarrollo": [
       "Diseño e impartición de capacitación",
       "Detección de necesidades (DNC)",
       "Diseño instruccional",
-      "Facilitación",
       "Liderazgo de grupos",
-      "Prompt engineering",
+      "Frameworks de LXD (Learning Experience Design)",
+      "Estándares e-learning (xAPI/SCORM/LRS)",
+      "Analítica de aprendizaje impulsada por IA para fuerza laboral",
     ],
     "Análisis de Datos y Business Intelligence": [
       "Power BI (modelado de datos, dashboards)",
-      "Análisis estadístico aplicado a negocio",
+      "Estadística (descriptiva, inferencial y predictiva) aplicada a negocio",
       "Excel intermedio-avanzado",
       "Nociones de SQL y Python",
+      "Bases de micro y macroeconomía",
     ],
     "Herramientas y Transferibles": [
       "Word",
       "PowerPoint",
       "Herramientas de autor (Easy Generator, Articulate, Genially)",
-      "HTML/React básico",
-      "Claude avanzado",
+      "HTML/React",
+      "Llamadas a API en JSX de React",
+      "Vibe coding",
+      "Prompt engineering",
       "Comunicación efectiva y adaptabilidad",
     ],
   },
@@ -326,26 +348,28 @@ export const es: Copy = {
   emailCopied: "Correo copiado — puedes pegarlo donde prefieras escribirme",
   linkedinLabel: "LinkedIn",
   badgeLocale: "es_ES",
-  footer: "Ángel Álvarez",
+  footer: "Jesús Álvarez",
 };
 
 export const en: Copy = {
   htmlLang: "en",
-  title:
-    "Ángel Álvarez | Learning Analyst (Associate) | Workforce Enablement & Business Strategy",
+  title: "Jesús Álvarez | Learning & People Analyst",
   metaDescription:
-    "Ángel Álvarez's digital CV: People Analytics, Training & Development, Recruitment and Organizational Development. Verifiable projects, publications, and experience.",
+    "Jesús Álvarez's digital CV: People Analytics, Workforce Enablement & Business Strategy, independent research in education and talent economics. Verifiable projects, publications, and experience.",
   skipToContent: "Skip to main content",
   location: "Nuevo León, Mexico",
+  headline:
+    "Learning & People Analyst | Workforce Enablement & Business Strategy | Independent Researcher in Education and Talent Economics",
   resumenProfesional:
-    "An education professional, technology enthusiast, and advocate for people development, with a background in social and behavioral sciences. Brings a data-driven mindset and work ethic to designing learning and workforce management solutions that strengthen talent capabilities and organizational development, through collaboration across strategic areas aimed at driving business intelligence for decision-making.",
+    "I hold a degree in Education and Administration, recognized by institutions like UMM and CANIETI for interdisciplinary collaboration with digital-transformation teams — including Microsoft — bringing strategic vision to automating higher-education management processes. Also recognized by UANL's Facultad de Filosofía y Letras as an AI-in-the-classroom instructor, shaping resilient professionals for digital transformation and Society 5.0.",
   navAriaLabel: "Main navigation",
   openMenu: "Open menu",
   closeMenu: "Close menu",
   close: "Close",
   languageToggleLabel: "Switch language to Spanish",
-  photoAlt: "Portrait of Ángel Álvarez",
+  photoAlt: "Portrait of Jesús Álvarez",
   ctaCv: "View CV (PDF)",
+  cvPdfUrl: "/CV-Jesus-Alvarez-EN.pdf",
   ctaContact: "Contact",
   navLinks: [
     { href: "#inicio", label: "Home" },
@@ -369,6 +393,8 @@ export const en: Copy = {
   },
   reconocimientoHint: "Click each badge to view the full recognition",
   reconocimientoAria: (t) => `View recognition: ${t}`,
+  proyectosHint:
+    "The Drive documents are open to comments — feel free to share your thoughts.",
   formacion: [
     {
       titulo: "Bachelor's Degree in Education and Educational Center Administration",
@@ -385,11 +411,14 @@ export const en: Copy = {
   ],
   licenciasCertificaciones: [
     {
-      title:
-        "Completion Certificate — Workforce Planning Strategy (Microsoft, via Coursera)",
-      src: "https://www.linkedin.com/embed/feed/update/urn:li:share:7501379217348096000?collapsed=1",
-      height: 539,
-      width: 504,
+      titulo: "Workforce Planning Strategy — Microsoft",
+      label:
+        "Coursera · Course 1 of the Strategic Workforce Planning specialization. Workforce planning with clear success metrics, Power BI dashboards with KPIs and DAX formulas, analysis of engagement and turnover-risk signals, and the impact of AI on talent needs.",
+      fecha: "Sep 2026",
+      url: "https://coursera.org/share/1173e7e3ea7497b4d355b6487be5ddbc",
+      linkText: "View certificate",
+      color: "rust",
+      icono: "certificado",
     },
   ],
   reconocimientoInstitucional: [
@@ -442,11 +471,18 @@ export const en: Copy = {
       },
     },
     {
-      titulo: "My Claude Skills",
-      tipo: "Project",
-      fecha: "2026 · ongoing development",
+      titulo: "Casa CoLectiva — Economics of Educational and Talent Development",
+      tipo: "Own project",
+      fecha: "Site under construction",
       descripcion:
-        "Personal repository of Claude skills focused on Human Resources and talent management; includes a skill for generating Strategic Workforce Planning Briefs through a guided 7-phase process.",
+        "Independent research and digital dissemination line focused on macroeconomic and labor-market factors in strategic talent development.",
+    },
+    {
+      titulo: "Protocolo CoLectivo — AI skills repository",
+      tipo: "Project",
+      fecha: "Ongoing development",
+      descripcion:
+        "AI (Claude) skills and workflows that encode original methodologies in the economics of education, talent management, and instructional design; each skill automates a specific workflow combining recognized theoretical frameworks with industry technical standards.",
       enlacePrincipal: {
         label: "View repository",
         url: "https://github.com/alvarezgzx-lab/mis-skills-de-claude",
@@ -458,7 +494,7 @@ export const en: Copy = {
       tipo: "Independent publication",
       fecha: "E-Socialis, UMM · approved, vol. 1 (pending publication)",
       descripcion:
-        "A review of 26 academic sources on the tension between market logic and social equity in the growth of the EdTech sector; proposes a four-pillar framework.",
+        "Casa CoLectiva's first publication: a review of 26 academic sources on the tension between market logic and social equity in the growth of the EdTech sector; proposes a four-pillar framework.",
       enlacePrincipal: {
         label: "View article",
         url: "https://drive.google.com/file/d/18sfS9noC6Jzw4UtMlHFNYUhjHRpyqrZu/view?usp=sharing",
@@ -473,8 +509,8 @@ export const en: Copy = {
       fecha: "2023 – 2026",
       bullets: [
         "Automated assessment processes and designed performance indicators to objectively track individual and group progress.",
-        "Simultaneously managed up to 11 groups of more than 30 people, sustaining collective performance under multiple priorities.",
-        "Provided individual and group mentoring, tutoring, and coaching — strengthening skills development, conflict management, and leadership of institutional initiatives (Ethics Academy, student electoral processes).",
+        "Simultaneously managed up to 11 groups of over 30 students each, sustaining collective performance under multiple competing priorities.",
+        "Provided individual and group mentoring, tutoring, and coaching — strengthening skills development and conflict management, and leading institutional initiatives (Ethics Academy, student council elections).",
       ],
     },
     {
@@ -482,15 +518,15 @@ export const en: Copy = {
       organizacion: "Talisis",
       fecha: "2022 – 2023",
       bullets: [
-        "Collaborated with Data Science, Software Engineering, and Product Innovation teams to develop content-generation tools for instructional design (undergraduate and graduate levels), supporting training needs assessment and the design of scalable learning solutions.",
+        "Collaborated with Data Science, Software Engineering, and Product Innovation teams to develop content-generation tools for instructional design (undergraduate and graduate programs), supporting training-needs assessment and the design of scalable learning solutions.",
       ],
     },
     {
-      puesto: "Independent Driver (app-based transportation)",
+      puesto: "Independent Driver (Ride-hailing)",
       organizacion: "Self-employed",
       fecha: "2019 – 2022",
       bullets: [
-        "Self-managed an independent business (income, financing, customer service, and time management), developing self-direction and results orientation under high autonomy.",
+        "Self-managed an independent business (income, financing, customer service, and time management), building self-management skills and a results-oriented approach under high autonomy.",
       ],
     },
     {
@@ -506,32 +542,35 @@ export const en: Copy = {
     "People Analytics, Talent & Organizational Development": [
       "Workforce planning",
       "People analytics",
-      "Recruitment and selection",
-      "Onboarding",
       "Performance and compensation",
       "Succession planning",
       "Change management and organizational culture",
+      "Strategic and business thinking",
     ],
     "Training & Development": [
       "Training design and delivery",
       "Training needs assessment (TNA)",
       "Instructional design",
-      "Facilitation",
       "Group leadership",
-      "Prompt engineering",
+      "LXD (Learning Experience Design) frameworks",
+      "E-learning standards (xAPI/SCORM/LRS)",
+      "AI-driven learning analytics for workforce",
     ],
     "Data Analysis & Business Intelligence": [
       "Power BI (data modeling, dashboards)",
-      "Business-applied statistical analysis",
+      "Statistics (descriptive, inferential, and predictive) applied to business",
       "Intermediate-advanced Excel",
       "Working knowledge of SQL and Python",
+      "Micro- and macroeconomics fundamentals",
     ],
     "Tools & Transferable Skills": [
       "Word",
       "PowerPoint",
       "Authoring tools (Easy Generator, Articulate, Genially)",
-      "Basic HTML/React",
-      "Advanced Claude",
+      "HTML/React",
+      "API calls in React JSX",
+      "Vibe coding",
+      "Prompt engineering",
       "Effective communication and adaptability",
     ],
   },
@@ -544,7 +583,7 @@ export const en: Copy = {
   emailCopied: "Email copied — paste it anywhere you'd like to reach me",
   linkedinLabel: "LinkedIn",
   badgeLocale: "en_US",
-  footer: "Ángel Álvarez",
+  footer: "Jesús Álvarez",
 };
 
 export const copyByLang: Record<Lang, Copy> = { es, en };

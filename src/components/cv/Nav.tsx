@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { persona } from "@/data/content";
 import { useLanguage } from "@/lib/language";
 
 export default function Nav() {
@@ -31,7 +32,7 @@ export default function Nav() {
           href="#inicio"
           className="shrink-0 whitespace-nowrap font-display text-lg italic tracking-tight text-cream"
         >
-          Ángel Álvarez
+          {persona.name}
         </a>
 
         <ul className="hidden flex-wrap items-center gap-x-5 gap-y-1 lg:flex">

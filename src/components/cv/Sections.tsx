@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Award, Cpu, ExternalLink, GraduationCap, Search, X } from "lucide-react";
-import { persona, type Reconocimiento } from "@/data/content";
+import { persona, type Insignia } from "@/data/content";
 import { useLanguage } from "@/lib/language";
 
 /* ---------- editorial primitives ---------- */
@@ -61,12 +61,12 @@ export function Hero() {
             </h1>
             <span aria-hidden="true" className="mt-6 block h-px w-24 bg-rust-ui" />
             <p className="mt-6 max-w-md font-body text-base leading-relaxed text-cream/75 sm:text-lg">
-              {persona.headline}
+              {copy.headline}
             </p>
 
             <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
               <a
-                href={persona.cvPdf}
+                href={copy.cvPdfUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-rust-ink px-6 py-3 font-mono text-xs uppercase tracking-[0.2em] text-cream transition-colors hover:bg-rust-ui"
@@ -151,38 +151,7 @@ export function Formacion() {
   );
 }
 
-/* ---------- certifications ---------- */
-
-export function Certificaciones() {
-  const { copy } = useLanguage();
-  return (
-    <Shell id="certificaciones">
-      <Masthead num="02">{copy.headings.certificaciones}</Masthead>
-      <div className="grid gap-8 sm:grid-cols-2">
-        {copy.licenciasCertificaciones.map((item) => (
-          <figure key={item.title} className="bg-cream p-5 text-navy">
-            <figcaption className="font-display text-lg font-normal italic leading-snug">
-              {item.title}
-            </figcaption>
-            <div className="mt-4 overflow-hidden">
-              <iframe
-                src={item.src}
-                height={item.height}
-                width={item.width}
-                title={item.title}
-                loading="lazy"
-                className="w-full max-w-full"
-                allowFullScreen
-              />
-            </div>
-          </figure>
-        ))}
-      </div>
-    </Shell>
-  );
-}
-
-/* ---------- recognition ---------- */
+/* ---------- shared: icon badge grid + modal (certifications & recognition) ---------- */
 
 const icons = {
   graduacion: GraduationCap,
@@ -190,9 +159,29 @@ const icons = {
   certificado: Award,
 };
 
-export function ReconocimientoInstitucional() {
+const badgeSurfaces: Record<string, string> = {
+  rust: "bg-rust text-cream",
+  sage: "bg-sage text-navy",
+  cream: "bg-cream text-navy",
+};
+
+function BadgeSection({
+  sectionId,
+  num,
+  heading,
+  hint,
+  items,
+  ariaLabel,
+}: {
+  sectionId: string;
+  num: string;
+  heading: string;
+  hint?: string;
+  items: Insignia[];
+  ariaLabel: (titulo: string) => string;
+}) {
   const { copy } = useLanguage();
-  const [active, setActive] = useState<Reconocimiento | null>(null);
+  const [active, setActive] = useState<Insignia | null>(null);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const dialogRef = useRef<HTMLDivElement | null>(null);
   const closeRef = useRef<HTMLButtonElement | null>(null);
@@ -230,37 +219,41 @@ export function ReconocimientoInstitucional() {
     triggerRef.current?.focus();
   };
 
-  const surfaces: Record<string, string> = {
-    rust: "bg-rust text-cream",
-    sage: "bg-sage text-navy",
-    cream: "bg-cream text-navy",
-  };
+  // Only PDFs (or an explicit `embed`) render inline — arbitrary third-party
+  // pages (e.g. Coursera share links) commonly block being framed, so those
+  // fall back to description + external link only.
+  const isPreviewablePdf = active ? active.url.toLowerCase().endsWith(".pdf") : false;
 
   return (
-    <Shell id="reconocimiento-institucional">
-      <Masthead num="03">{copy.headings.reconocimiento}</Masthead>
-      <Aside>{copy.reconocimientoHint}</Aside>
+    <Shell id={sectionId}>
+      <Masthead num={num}>{heading}</Masthead>
+      {hint ? <Aside>{hint}</Aside> : null}
 
-      <ul className="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-3">
-        {copy.reconocimientoInstitucional.map((item) => {
+      <ul className={`flex flex-wrap justify-center gap-10 ${hint ? "mt-10" : ""}`}>
+        {items.map((item) => {
           const Icon = icons[item.icono];
           return (
-            <li key={item.titulo} className="flex flex-col items-center text-center">
+            <li key={item.titulo} className="flex w-48 flex-col items-center text-center">
               <button
                 type="button"
-                aria-label={copy.reconocimientoAria(item.titulo)}
+                aria-label={ariaLabel(item.titulo)}
                 onClick={(e) => {
                   triggerRef.current = e.currentTarget;
                   setActive(item);
                 }}
-                className={`relative flex h-24 w-24 items-center justify-center rounded-full transition-transform hover:scale-105 ${surfaces[item.color]}`}
+                className={`relative flex h-24 w-24 items-center justify-center rounded-full transition-transform hover:scale-105 ${badgeSurfaces[item.color]}`}
               >
                 <Icon className="h-9 w-9" aria-hidden="true" />
                 <span className="absolute bottom-0 right-0 rounded-full bg-navy p-1.5 text-cream ring-1 ring-cream/25">
                   <Search className="h-3 w-3" aria-hidden="true" />
                 </span>
               </button>
-              <h3 className="mt-5 font-display text-base font-normal italic text-cream">
+              {item.fecha ? (
+                <p className="mt-4 font-mono text-[0.65rem] uppercase tracking-[0.18em] text-sage-light">
+                  {item.fecha}
+                </p>
+              ) : null}
+              <h3 className="mt-2 font-display text-base font-normal italic text-cream">
                 {item.titulo}
               </h3>
               <p className="mt-2 max-w-xs font-body text-sm leading-relaxed text-cream/65">
@@ -297,21 +290,23 @@ export function ReconocimientoInstitucional() {
               </button>
             </div>
             <p className="mt-3 font-body text-sm leading-relaxed text-navy/80">{active.label}</p>
-            <div className="mt-4">
-              {active.embed ? (
-                <iframe
-                  src={active.embed.src}
-                  title={active.embed.title}
-                  height={active.embed.height}
-                  width={active.embed.width}
-                  loading="lazy"
-                  className="w-full max-w-full"
-                  allowFullScreen
-                />
-              ) : (
-                <iframe src={active.url} title={active.titulo} className="h-[60vh] w-full" />
-              )}
-            </div>
+            {active.embed || isPreviewablePdf ? (
+              <div className="mt-4">
+                {active.embed ? (
+                  <iframe
+                    src={active.embed.src}
+                    title={active.embed.title}
+                    height={active.embed.height}
+                    width={active.embed.width}
+                    loading="lazy"
+                    className="w-full max-w-full"
+                    allowFullScreen
+                  />
+                ) : (
+                  <iframe src={active.url} title={active.titulo} className="h-[60vh] w-full" />
+                )}
+              </div>
+            ) : null}
             <a
               href={active.url}
               target="_blank"
@@ -328,6 +323,37 @@ export function ReconocimientoInstitucional() {
   );
 }
 
+/* ---------- certifications ---------- */
+
+export function Certificaciones() {
+  const { copy } = useLanguage();
+  return (
+    <BadgeSection
+      sectionId="certificaciones"
+      num="02"
+      heading={copy.headings.certificaciones}
+      items={copy.licenciasCertificaciones}
+      ariaLabel={copy.reconocimientoAria}
+    />
+  );
+}
+
+/* ---------- recognition ---------- */
+
+export function ReconocimientoInstitucional() {
+  const { copy } = useLanguage();
+  return (
+    <BadgeSection
+      sectionId="reconocimiento-institucional"
+      num="03"
+      heading={copy.headings.reconocimiento}
+      hint={copy.reconocimientoHint}
+      items={copy.reconocimientoInstitucional}
+      ariaLabel={copy.reconocimientoAria}
+    />
+  );
+}
+
 /* ---------- projects ---------- */
 
 export function Proyectos() {
@@ -335,7 +361,8 @@ export function Proyectos() {
   return (
     <Shell id="proyectos">
       <Masthead num="04">{copy.headings.proyectos}</Masthead>
-      <ul className="divide-y divide-cream/12">
+      <Aside>{copy.proyectosHint}</Aside>
+      <ul className="mt-10 divide-y divide-cream/12">
         {copy.proyectosPublicaciones.map((p, i) => (
           <li key={p.titulo} className="py-8 first:pt-0 sm:grid sm:grid-cols-[7.5rem_1fr] sm:gap-6">
             <div>
@@ -356,15 +383,17 @@ export function Proyectos() {
               <p className="mt-3 max-w-2xl font-body text-sm leading-relaxed text-cream/75">
                 {p.descripcion}
               </p>
-              <a
-                href={p.enlacePrincipal.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-rust-light underline-offset-4 hover:underline"
-              >
-                {p.enlacePrincipal.label}
-                <ExternalLink className="h-4 w-4" aria-hidden="true" />
-              </a>
+              {p.enlacePrincipal ? (
+                <a
+                  href={p.enlacePrincipal.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-rust-light underline-offset-4 hover:underline"
+                >
+                  {p.enlacePrincipal.label}
+                  <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                </a>
+              ) : null}
             </div>
           </li>
         ))}
@@ -523,9 +552,9 @@ export function Contacto() {
               href={persona.linkedinBadge}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`${copy.linkedinLabel} — Ángel Álvarez`}
+              aria-label={`${copy.linkedinLabel} — ${persona.name}`}
             >
-              Ángel Álvarez G.
+              {persona.name} G.
             </a>
           </div>
         </div>
