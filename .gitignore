@@ -10,7 +10,18 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+.output
+.vinxi
+.tanstack/**
+.nitro
 *.local
+
+# Wrangler / Cloudflare
+.wrangler/
+.dev.vars
+
+# Vercel build output (regenerated on every deploy)
+.vercel
 
 # Editor directories and files
 .vscode/*
