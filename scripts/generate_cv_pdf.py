@@ -294,7 +294,17 @@ ES = {
                 "BI con KPIs y fórmulas DAX, análisis de señales de engagement y riesgo de "
                 "rotación, e impacto de la IA en las necesidades de talento."
             ),
-        }
+        },
+        {
+            "titulo": "AI-Driven Learning Analytics for Workforce — Arizona State University",
+            "fecha": "Sep 2026",
+            "label": (
+                "Coursera · Arizona State University. Aplicación de IA y analítica de "
+                "aprendizaje al desarrollo de la fuerza laboral: identificación de brechas de "
+                "habilidades, estrategias personalizadas para mejorar desempeño y retención, y "
+                "marcos éticos para abordar sesgo, privacidad y transparencia en sistemas de IA."
+            ),
+        },
     ],
     "proyectos": [
         {
@@ -484,7 +494,17 @@ EN = {
                 "and DAX formulas, analysis of engagement and turnover-risk signals, and the "
                 "impact of AI on talent needs."
             ),
-        }
+        },
+        {
+            "titulo": "AI-Driven Learning Analytics for Workforce — Arizona State University",
+            "fecha": "Sep 2026",
+            "label": (
+                "Coursera · Arizona State University. Applying AI and learning analytics to "
+                "workforce development: identifying skill gaps, personalized strategies to "
+                "improve performance and retention, and ethical frameworks addressing bias, "
+                "privacy, and transparency in AI systems."
+            ),
+        },
     ],
     "proyectos": [
         {

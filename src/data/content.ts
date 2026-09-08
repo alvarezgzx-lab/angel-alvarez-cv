@@ -118,6 +118,12 @@ const canietiEmbed = {
   width: 504,
 } satisfies Omit<Embed, "title">;
 
+const workforceAnalyticsEmbed = {
+  src: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7503151834350604288?collapsed=1",
+  height: 531,
+  width: 504,
+} satisfies Omit<Embed, "title">;
+
 
 export const es: Copy = {
   htmlLang: "es-MX",
@@ -193,6 +199,20 @@ export const es: Copy = {
       linkText: "Ver certificado",
       color: "rust",
       icono: "certificado",
+    },
+    {
+      titulo: "AI-Driven Learning Analytics for Workforce — Arizona State University",
+      label:
+        "Coursera · Arizona State University. Aplicación de IA y analítica de aprendizaje al desarrollo de la fuerza laboral: identificación de brechas de habilidades, estrategias personalizadas para mejorar desempeño y retención, y marcos éticos para abordar sesgo, privacidad y transparencia en sistemas de IA.",
+      fecha: "Sep 2026",
+      url: "https://www.coursera.org/account/accomplishments/verify/8YY3BK67ECFT",
+      linkText: "Ver certificado",
+      color: "sage",
+      icono: "certificado",
+      embed: {
+        title: "Publicación de LinkedIn — certificación AI-Driven Learning Analytics for Workforce",
+        ...workforceAnalyticsEmbed,
+      },
     },
   ],
   reconocimientoInstitucional: [
@@ -415,6 +435,20 @@ export const en: Copy = {
       linkText: "View certificate",
       color: "rust",
       icono: "certificado",
+    },
+    {
+      titulo: "AI-Driven Learning Analytics for Workforce — Arizona State University",
+      label:
+        "Coursera · Arizona State University. Applying AI and learning analytics to workforce development: identifying skill gaps, personalized strategies to improve performance and retention, and ethical frameworks addressing bias, privacy, and transparency in AI systems.",
+      fecha: "Sep 2026",
+      url: "https://www.coursera.org/account/accomplishments/verify/8YY3BK67ECFT",
+      linkText: "View certificate",
+      color: "sage",
+      icono: "certificado",
+      embed: {
+        title: "LinkedIn post — AI-Driven Learning Analytics for Workforce certification",
+        ...workforceAnalyticsEmbed,
+      },
     },
   ],
   reconocimientoInstitucional: [
